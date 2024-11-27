@@ -2,10 +2,7 @@ package com.invoice.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
@@ -15,12 +12,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class InvoiceModel {
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
-    @Column(name = "id", updatable = false, nullable = false, unique = true, columnDefinition = "RAW(16)")
     private UUID id;
     private String sourceSystemAppRefNo;
     private String sourceSysVoucherNo;
@@ -31,7 +22,14 @@ public class InvoiceModel {
     private String phoneNumber;
     private String email;
     private String customerType;
+    private String licenseNumber;
+    private String userId;
     private Double fees;
     private Integer quantity;
     private String language;
+    public UUID getId(){
+        return id == null? UUID.randomUUID() : id;
+    }
+
+
 }

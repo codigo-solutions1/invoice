@@ -2,47 +2,57 @@ package com.invoice.transformer;
 
 import com.invoice.domain.InvoiceDomain;
 import com.invoice.model.InvoiceModel;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
+@RequiredArgsConstructor
 @Component
-public class InvoiceTransformer {
-    public InvoiceModel toModel(InvoiceDomain invoiceDomain){
-        InvoiceModel model = new InvoiceModel();
-        model.setId(UUID.randomUUID());
-        model.setSourceSystemAppRefNo(invoiceDomain.getSourceSystemAppRefNo());
-        model.setSourceSysVoucherNo(invoiceDomain.getSourceSysVoucherNo());
-        model.setSourceSysAppRefDate(invoiceDomain.getSourceSysAppRefDate().toString());
-        model.setPaymentConfigCode(invoiceDomain.getPaymentConfigCode());
-        model.setVoucherConfigType(invoiceDomain.getVoucherConfigType());
-        model.setFullName(invoiceDomain.getFullName());
-        model.setPhoneNumber(invoiceDomain.getPhoneNumber());
-        model.setEmail(invoiceDomain.getEmail());
-        model.setCustomerType(invoiceDomain.getCustomerType());
-        model.setFees(invoiceDomain.getFees());
-        model.setQuantity(invoiceDomain.getQuantity());
-        model.setLanguage(invoiceDomain.getLanguage());
-        return model;
+public class InvoiceTransformer implements InvoiceInterface <InvoiceModel, InvoiceDomain> {
+   @Override
+    public InvoiceDomain toEntity(InvoiceModel model) {
+        return InvoiceDomain.builder()
+                .id(model.getId())
+                .sourceSystemAppRefNo(model.getSourceSystemAppRefNo())
+                .sourceSysVoucherNo(model.getSourceSysVoucherNo())
+                .sourceSysAppRefDate(LocalDateTime.parse(model.getSourceSysAppRefDate()))
+                .paymentConfigCode(model.getPaymentConfigCode())
+                .voucherConfigType(model.getVoucherConfigType())
+                .fullName(model.getFullName())
+                .phoneNumber(model.getPhoneNumber())
+                .email(model.getEmail())
+                .customerType(model.getCustomerType())
+                .licenseNumber(model.getLicenseNumber())
+                .userId(model.getUserId())
+                .fees(model.getFees())
+                .quantity(model.getQuantity())
+                .language(model.getLanguage())
+                .build();
     }
 
-    public InvoiceDomain toEntity(InvoiceModel invoiceModel){
-        InvoiceDomain invoiceDomain = new InvoiceDomain();
-        invoiceDomain.setId(UUID.randomUUID());
-        invoiceDomain.setSourceSystemAppRefNo(invoiceModel.getSourceSystemAppRefNo());
-        invoiceDomain.setSourceSysVoucherNo(invoiceModel.getSourceSysVoucherNo());
-        invoiceDomain.setSourceSysAppRefDate(LocalDateTime.parse(invoiceModel.getSourceSysAppRefDate().toString()));
-        invoiceDomain.setPaymentConfigCode(invoiceModel.getPaymentConfigCode());
-        invoiceDomain.setVoucherConfigType(invoiceModel.getVoucherConfigType());
-        invoiceDomain.setFullName(invoiceModel.getFullName());
-        invoiceDomain.setPhoneNumber(invoiceModel.getPhoneNumber());
-        invoiceDomain.setEmail(invoiceModel.getEmail());
-        invoiceDomain.setCustomerType(invoiceModel.getCustomerType());
-        invoiceDomain.setFees(invoiceModel.getFees());
-        invoiceDomain.setQuantity(invoiceModel.getQuantity());
-        invoiceDomain.setLanguage(invoiceModel.getLanguage());
-        return invoiceDomain;
+@Override
+    public InvoiceModel toModel(InvoiceDomain entity) {
+        return InvoiceModel.builder()
+                .id(entity.getId())
+                .sourceSystemAppRefNo(entity.getSourceSystemAppRefNo())
+                .sourceSysVoucherNo(entity.getSourceSysVoucherNo())
+                .sourceSysAppRefDate(String.valueOf(entity.getSourceSysAppRefDate()))
+                .paymentConfigCode(entity.getPaymentConfigCode())
+                .voucherConfigType(entity.getVoucherConfigType())
+                .fullName(entity.getFullName())
+                .phoneNumber(entity.getPhoneNumber())
+                .email(entity.getEmail())
+                .customerType(entity.getCustomerType())
+                .licenseNumber(entity.getLicenseNumber())
+                .userId(entity.getUserId())
+                .fees(entity.getFees())
+                .quantity(entity.getQuantity())
+                .language(entity.getLanguage())
+                .build();
     }
+
+
 
 }
+

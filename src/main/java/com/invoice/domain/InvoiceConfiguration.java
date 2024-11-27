@@ -1,5 +1,6 @@
 package com.invoice.domain;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
@@ -14,13 +15,19 @@ import java.util.UUID;
 public class InvoiceConfiguration {
     @Id
     private final UUID id;
+    @NotEmpty
     private final String invoiceConfigurationCode;
-    private final List<InvoiceType> invoiceTypes;
-    private final String callbackUrl;
-    private final String dmAcquisitionApiKey;
+    @NotEmpty
+    private final String serviceCode;
+    @NotEmpty
+    private final String entityTypeCode;
+    @NotEmpty
+    private final String ledgerAlias;
+    @NotEmpty
     private final String invoiceConfirmationUrl;
-    private final String pgConfirmationGatewayKey;
-    private final String sourceChannel;
+
+    private final String callbackUrl;
+
 
 }
 

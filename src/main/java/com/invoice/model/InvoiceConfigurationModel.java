@@ -13,20 +13,12 @@ import java.util.UUID;
 @Builder
 public class InvoiceConfigurationModel {
     private UUID id;
-
     private String invoiceConfigurationCode;
-
-    private List<InvoiceTypeModel> invoiceType;
-
-    private String callbackUrl;
-
-    private String dmAcquisitionApiKey;
-
+    private String serviceCode;
+    private String entityTypeCode;
+    private String ledgerAlias;
     private String invoiceConfirmationUrl;
-
-    private String pgConfirmationGatewayKey;
-
-    private String sourceChannel;
+    private String callbackUrl;
 
     public UUID getId(){
     return id == null? UUID.randomUUID() : id;

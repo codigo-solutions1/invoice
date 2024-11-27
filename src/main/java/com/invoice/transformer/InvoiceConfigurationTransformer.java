@@ -9,20 +9,17 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class InvoiceConfigurationTransformer implements Transformer<InvoiceConfigurationModel, InvoiceConfiguration> {
 
-    private final InvoiceTypeTransformer invoiceTypeTransformer;
 
     @Override
     public InvoiceConfiguration toEntity(InvoiceConfigurationModel model) {
-
         return InvoiceConfiguration.builder()
                 .id(model.getId())
                 .invoiceConfigurationCode(model.getInvoiceConfigurationCode())
+                .serviceCode(model.getServiceCode())
+                .entityTypeCode(model.getEntityTypeCode())
+                .ledgerAlias(model.getLedgerAlias())
                 .invoiceConfirmationUrl(model.getInvoiceConfirmationUrl())
                 .callbackUrl(model.getCallbackUrl())
-                .dmAcquisitionApiKey(model.getDmAcquisitionApiKey())
-                .pgConfirmationGatewayKey(model.getPgConfirmationGatewayKey())
-                .sourceChannel(model.getSourceChannel())
-                .invoiceTypes(invoiceTypeTransformer.toEntities(model.getInvoiceType()))
                 .build();
     }
 
@@ -31,12 +28,12 @@ public class InvoiceConfigurationTransformer implements Transformer<InvoiceConfi
         return InvoiceConfigurationModel.builder()
                 .id(entity.getId())
                 .invoiceConfigurationCode(entity.getInvoiceConfigurationCode())
+                .serviceCode(entity.getServiceCode())
+                .entityTypeCode(entity.getEntityTypeCode())
+                .ledgerAlias(entity.getLedgerAlias())
                 .invoiceConfirmationUrl(entity.getInvoiceConfirmationUrl())
                 .callbackUrl(entity.getCallbackUrl())
-                .dmAcquisitionApiKey(entity.getDmAcquisitionApiKey())
-                .pgConfirmationGatewayKey(entity.getPgConfirmationGatewayKey())
-                .sourceChannel(entity.getSourceChannel())
-                .invoiceType(invoiceTypeTransformer.toModels(entity.getInvoiceTypes()))
                 .build();
     }
+
 }
