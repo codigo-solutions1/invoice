@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Invoice Configuration Controller", description = "API for managing invoice configurations")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/payments/configurations")
+@RequestMapping("/invoices/configurations")
 public class InvoiceConfigurationController {
 
     private final InvoiceConfigurationHandler invoiceConfigurationHandler;

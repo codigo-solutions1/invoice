@@ -1,7 +1,7 @@
 package com.invoice.controller;
 
 import com.invoice.handler.InvoiceHandler;
-import com.invoice.model.InvoiceModel;
+import com.invoice.model.invoice.InvoiceModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "Invoice Configuration Controller", description = "API for managing invoice configurations")
+@Tag(name = "Invoice Controller", description = "API for managing invoices")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/payments/configurations")
+@RequestMapping("/invoices")
 public class InvoiceController {
 
     private final InvoiceHandler invoiceHandler;

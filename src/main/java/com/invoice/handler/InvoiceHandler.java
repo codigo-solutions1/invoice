@@ -1,9 +1,7 @@
 package com.invoice.handler;
 
-import com.invoice.domain.InvoiceConfiguration;
 import com.invoice.domain.InvoiceDomain;
-import com.invoice.model.InvoiceConfigurationModel;
-import com.invoice.model.InvoiceModel;
+import com.invoice.model.invoice.InvoiceModel;
 import com.invoice.service.InvoiceService;
 import com.invoice.transformer.InvoiceTransformer;
 import lombok.RequiredArgsConstructor;

@@ -1,18 +1,16 @@
 package com.invoice.domain;
 
-import jakarta.persistence.*;
-import lombok.*;
-
-import org.hibernate.annotations.GenericGenerator;
+import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Builder
 @Getter
-@Table(name = "vouchers")
+//@Table(name = "vouchers")
 public class InvoiceDomain {
-    @Id
+    //    @Id
     private final UUID id;
     private final String sourceSystemAppRefNo;
     private final String sourceSysVoucherNo;
@@ -28,7 +26,6 @@ public class InvoiceDomain {
     private final double fees;
     private final int quantity;
     private final String language;
-
 
 
 }
