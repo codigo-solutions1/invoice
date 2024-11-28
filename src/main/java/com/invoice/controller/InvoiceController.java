@@ -1,12 +1,14 @@
 package com.invoice.controller;
 
-import com.invoice.handler.InvoiceHandler;
+import com.invoice.domain.Invoice;
 import com.invoice.dto.invoice.InvoiceDTO;
+import com.invoice.service.InvoiceService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/invoices")
 public class InvoiceController {
 
-    private final InvoiceHandler invoiceHandler;
+    private final InvoiceService invoiceService;
 
 
     @Operation(
@@ -31,11 +33,10 @@ public class InvoiceController {
             }
     )
     @PostMapping
-    public ResponseEntity createInvoice(
-            @Parameter(description = "Invoice configuration data to be created", required = true)
-            @RequestBody InvoiceDTO invoiceDTO) {
-        InvoiceDTO invoice = invoiceHandler.createInvoice(invoiceDTO);
-        return ResponseEntity.ok(invoice);
+    public ResponseEntity<Invoice> createInvoice(@RequestBody InvoiceDTO dto)
+    {
+        Invoice invoice = invoiceService.saveInvoice(dto);
+        return new ResponseEntity<>(invoice, HttpStatus.CREATED);
     }
 }
 
