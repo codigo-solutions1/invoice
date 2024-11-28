@@ -29,6 +29,4 @@ public class InvoiceDTO {
     private CustomerDetailDTO customerDetail;
     private List<InvoiceLineDetailDTO> invoiceLineDetail;
     private ReserveAttributeDTO reserveAttribute;
-    @JsonIgnore
-    private InvoiceConfigurationDTO invoiceConfigurationDTO;
 }
