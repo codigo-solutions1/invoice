@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -26,7 +27,6 @@ public class InvoiceDTO {
     private String description;
     private String language;
     private CustomerDetailDTO customerDetail;
-    private InvoiceLineDetailDTO invoiceLineDetail;
+    private List<InvoiceLineDetailDTO> invoiceLineDetail; // Changed to List
     private ReserveAttributeDTO reserveAttribute;
-
 }
