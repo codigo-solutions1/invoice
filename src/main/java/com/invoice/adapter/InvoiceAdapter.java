@@ -25,7 +25,6 @@ public class InvoiceAdapter {
     public void createInvoice(String invoice) {
         Connection conn = null;
         CallableStatement stmt = null;
-
         try {
             conn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
             stmt = conn.prepareCall("{call process_invoice(?)}");
