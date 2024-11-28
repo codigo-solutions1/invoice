@@ -1,6 +1,9 @@
 package com.invoice.handler;
 
+import com.invoice.dto.ResponseDTO;
 import com.invoice.dto.invoice.InvoiceDTO;
+import com.invoice.expert.InvoiceExpert;
+import com.invoice.validator.InvoiceValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -8,7 +11,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class InvoiceHandler {
 
-    public InvoiceDTO createInvoice(InvoiceDTO invoiceDTO) {
-        return null;
+    private final InvoiceValidator invoiceValidator;
+    private final InvoiceExpert invoiceExpert;
+
+    public ResponseDTO createInvoice(InvoiceDTO invoiceDTO) {
+        invoiceValidator.validate(invoiceDTO);
+        invoiceExpert.create(invoiceDTO);
+        return new ResponseDTO();
     }
+
 }

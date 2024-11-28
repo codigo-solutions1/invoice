@@ -16,7 +16,7 @@ public class CustomerDetailDTO {
     private String licenseNo;
 
     private String fullName;
-    private int phoneNumber;
+    private String phoneNumber;
     private String email;
     private String emiratesId;
 }
