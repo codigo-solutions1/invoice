@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 @Slf4j
-@ControllerAdvice
+//@ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(DuplicateEntryException.class)
-    public ResponseEntity<ErrorResponseModel> handleNullPointerException(DuplicateEntryException ex) {
-        log.error("Duplicate entry issue: ", ex);
-        ErrorResponseModel ErrorResponseModel = new ErrorResponseModel(HttpStatus.CONFLICT.getReasonPhrase(), ex.getMessage());
-        return new ResponseEntity<>(ErrorResponseModel, HttpStatus.CONFLICT);
-    }
+//    @ExceptionHandler(DuplicateEntryException.class)
+//    public ResponseEntity<ErrorResponseModel> handleNullPointerException(DuplicateEntryException ex) {
+//        log.error("Duplicate entry issue: ", ex);
+//        ErrorResponseModel ErrorResponseModel = new ErrorResponseModel(HttpStatus.CONFLICT.getReasonPhrase(), ex.getMessage());
+//        return new ResponseEntity<>(ErrorResponseModel, HttpStatus.CONFLICT);
+//    }
 }
