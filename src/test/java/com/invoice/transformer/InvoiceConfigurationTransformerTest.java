@@ -3,7 +3,7 @@ package com.invoice.transformer;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.invoice.domain.InvoiceConfiguration;
-import com.invoice.model.InvoiceConfigurationModel;
+import com.invoice.dto.InvoiceConfigurationDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +20,7 @@ public class InvoiceConfigurationTransformerTest {
 
     @Test
     public void testToEntity() {
-        InvoiceConfigurationModel model = InvoiceConfigurationModel.builder()
+        InvoiceConfigurationDTO model = InvoiceConfigurationDTO.builder()
                 .id(UUID.randomUUID())
                 .invoiceConfigurationCode("INV-123")
                 .serviceCode("SRV-001")
@@ -54,7 +54,7 @@ public class InvoiceConfigurationTransformerTest {
                 .callbackUrl("https://callback.url")
                 .build();
 
-        InvoiceConfigurationModel model = transformer.toModel(entity);
+        InvoiceConfigurationDTO model = transformer.toModel(entity);
 
         assertNotNull(model, "Model should not be null");
         assertEquals(entity.getId(), model.getId(), "ID should match");

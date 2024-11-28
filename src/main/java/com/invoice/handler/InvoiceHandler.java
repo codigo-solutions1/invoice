@@ -1,6 +1,6 @@
 package com.invoice.handler;
 
-import com.invoice.model.invoice.InvoiceModel;
+import com.invoice.dto.invoice.InvoiceDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class InvoiceHandler {
 
-    public InvoiceModel createInvoice(InvoiceModel invoiceModel) {
+    public InvoiceDTO createInvoice(InvoiceDTO invoiceDTO) {
         return null;
     }
 }

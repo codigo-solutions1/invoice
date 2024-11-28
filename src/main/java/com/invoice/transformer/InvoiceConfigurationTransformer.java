@@ -1,17 +1,17 @@
 package com.invoice.transformer;
 
 import com.invoice.domain.InvoiceConfiguration;
-import com.invoice.model.InvoiceConfigurationModel;
+import com.invoice.dto.InvoiceConfigurationDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class InvoiceConfigurationTransformer implements Transformer<InvoiceConfigurationModel, InvoiceConfiguration> {
+public class InvoiceConfigurationTransformer implements Transformer<InvoiceConfigurationDTO, InvoiceConfiguration> {
 
 
     @Override
-    public InvoiceConfiguration toEntity(InvoiceConfigurationModel model) {
+    public InvoiceConfiguration toEntity(InvoiceConfigurationDTO model) {
         return InvoiceConfiguration.builder()
                 .id(model.getId())
                 .invoiceConfigurationCode(model.getInvoiceConfigurationCode())
@@ -24,8 +24,8 @@ public class InvoiceConfigurationTransformer implements Transformer<InvoiceConfi
     }
 
     @Override
-    public InvoiceConfigurationModel toModel(InvoiceConfiguration entity) {
-        return InvoiceConfigurationModel.builder()
+    public InvoiceConfigurationDTO toModel(InvoiceConfiguration entity) {
+        return InvoiceConfigurationDTO.builder()
                 .id(entity.getId())
                 .invoiceConfigurationCode(entity.getInvoiceConfigurationCode())
                 .serviceCode(entity.getServiceCode())

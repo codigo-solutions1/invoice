@@ -1,11 +1,11 @@
-package com.invoice.model;
+package com.invoice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ErrorResponseModel {
+public class ErrorResponseDTO {
     private String errorCode;
     private String message;
 }

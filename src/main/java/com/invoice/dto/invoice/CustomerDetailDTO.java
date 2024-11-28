@@ -1,4 +1,4 @@
-package com.invoice.model.invoice;
+package com.invoice.dto.invoice;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class CustomerDetailModel {
+public class CustomerDetailDTO {
 
     @NotNull(message = "Authenticated is required")
     private Boolean authenticated;

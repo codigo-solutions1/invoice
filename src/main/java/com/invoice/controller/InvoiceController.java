@@ -1,7 +1,7 @@
 package com.invoice.controller;
 
 import com.invoice.handler.InvoiceHandler;
-import com.invoice.model.invoice.InvoiceModel;
+import com.invoice.dto.invoice.InvoiceDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -33,8 +33,8 @@ public class InvoiceController {
     @PostMapping
     public ResponseEntity createInvoice(
             @Parameter(description = "Invoice configuration data to be created", required = true)
-            @RequestBody InvoiceModel invoiceModel) {
-        InvoiceModel invoice = invoiceHandler.createInvoice(invoiceModel);
+            @RequestBody InvoiceDTO invoiceDTO) {
+        InvoiceDTO invoice = invoiceHandler.createInvoice(invoiceDTO);
         return ResponseEntity.ok(invoice);
     }
 }

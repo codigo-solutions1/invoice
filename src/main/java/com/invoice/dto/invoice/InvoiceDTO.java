@@ -1,4 +1,4 @@
-package com.invoice.model.invoice;
+package com.invoice.dto.invoice;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class InvoiceModel {
+public class InvoiceDTO {
     private UUID id;
     @NotNull(message = "Source system app reference number is required")
     private String sourceSystemAppRefNo;
@@ -25,8 +25,8 @@ public class InvoiceModel {
     @NotNull(message = "Description is required")
     private String description;
     private String language;
-    private CustomerDetailModel customerDetail;
-    private InvoiceLineDetailModel invoiceLineDetail;
-    private ReserveAttributeModel reserveAttribute;
+    private CustomerDetailDTO customerDetail;
+    private InvoiceLineDetailDTO invoiceLineDetail;
+    private ReserveAttributeDTO reserveAttribute;
 
 }

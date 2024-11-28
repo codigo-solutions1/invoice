@@ -1,4 +1,4 @@
-package com.invoice.model;
+package com.invoice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +10,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class InvoiceConfigurationModel {
+public class InvoiceConfigurationDTO {
     private UUID id;
     private String invoiceConfigurationCode;
     private String serviceCode;

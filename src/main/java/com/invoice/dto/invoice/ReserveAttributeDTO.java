@@ -1,11 +1,11 @@
-package com.invoice.model.invoice;
+package com.invoice.dto.invoice;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class ReserveAttributeModel {
+public class ReserveAttributeDTO {
 
     private String reserve1;
     private String reserve2;
