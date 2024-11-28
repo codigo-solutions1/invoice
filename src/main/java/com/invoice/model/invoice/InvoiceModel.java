@@ -24,9 +24,9 @@ public class InvoiceModel {
     private String invoiceConfigCode;
     @NotNull(message = "Description is required")
     private String description;
-    @NotNull(message = "Language is required")
     private String language;
     private CustomerDetailModel customerDetail;
     private InvoiceLineDetailModel invoiceLineDetail;
     private ReserveAttributeModel reserveAttribute;
+
 }
