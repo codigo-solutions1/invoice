@@ -1,7 +1,5 @@
 package com.invoice.dto.invoice;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.invoice.dto.InvoiceConfigurationDTO;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
