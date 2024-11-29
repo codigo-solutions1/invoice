@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.invoice.adapter.InvoiceAdapter;
 import com.invoice.domain.InvoiceConfiguration;
+import com.invoice.dto.InvoiceCriteriaDTO;
 import com.invoice.dto.invoice.InvoiceDTO;
 import com.invoice.service.InvoiceConfigurationService;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,10 @@ public class InvoiceExpert {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void cancel(InvoiceCriteriaDTO invoiceCriteriaDTO) {
+
     }
 
     private String createInvoiceJson(InvoiceDTO invoiceDTO, InvoiceConfiguration invoiceConfiguration) throws JsonProcessingException {

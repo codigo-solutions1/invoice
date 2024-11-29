@@ -1,4 +1,4 @@
-package com.invoice.dto.invoice;
+package com.invoice.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CancelInvoiceDTO {
+public class InvoiceCriteriaDTO {
     private String invoiceConfigCode;
     private String sourceSysChannel;
     private String ERADVoucherRefNo;
