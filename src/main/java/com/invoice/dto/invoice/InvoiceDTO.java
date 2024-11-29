@@ -19,11 +19,12 @@ public class InvoiceDTO {
     private String sourceSysVoucherNo;
     @NotNull(message = "Source system app reference date is required")
     private String sourceSysAppRefDate;
-    @NotNull(message = "Source system config code is required")
-    private String invoiceConfigCode;
+    @NotNull(message = "Source system configuration code is required")
+    private String invoiceConfigurationCode;
     @NotNull(message = "Description is required")
     private String description;
     private String language;
+    private String sourceSysChannel;
     private CustomerDetailDTO customerDetail;
     private List<InvoiceLineDetailDTO> invoiceLineDetail;
     private ReserveAttributeDTO reserveAttribute;

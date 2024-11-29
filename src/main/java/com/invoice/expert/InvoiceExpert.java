@@ -21,7 +21,7 @@ public class InvoiceExpert {
     public void create(InvoiceDTO invoiceDTO) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(invoiceDTO.getInvoiceConfigCode());
+            InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(invoiceDTO.getInvoiceConfigurationCode());
             String invoiceJson = objectMapper.writeValueAsString(invoiceDTO);
             ObjectNode invoiceNode = (ObjectNode) objectMapper.readTree(invoiceJson);
             String invoiceConfigurationJson = objectMapper.writeValueAsString(invoiceConfiguration);
