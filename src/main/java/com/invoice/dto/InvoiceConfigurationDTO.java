@@ -18,6 +18,7 @@ public class InvoiceConfigurationDTO {
     private String entityTypeCode;
     private String ledgerAlias;
     private String invoiceConfirmationUrl;
+    private String serviceProviderCode;
     private String callbackUrl;
 
     public UUID getId(){

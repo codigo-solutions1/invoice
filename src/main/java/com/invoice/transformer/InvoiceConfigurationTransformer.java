@@ -20,6 +20,7 @@ public class InvoiceConfigurationTransformer implements Transformer<InvoiceConfi
                 .entityTypeCode(model.getEntityTypeCode())
                 .ledgerAlias(model.getLedgerAlias())
                 .invoiceConfirmationUrl(model.getInvoiceConfirmationUrl())
+                .serviceProviderCode(model.getServiceProviderCode())
                 .callbackUrl(model.getCallbackUrl())
                 .build();
     }
@@ -33,6 +34,7 @@ public class InvoiceConfigurationTransformer implements Transformer<InvoiceConfi
                 .sourceSystemCode(entity.getSourceSystemCode())
                 .entityTypeCode(entity.getEntityTypeCode())
                 .ledgerAlias(entity.getLedgerAlias())
+                .serviceProviderCode(entity.getServiceProviderCode())
                 .invoiceConfirmationUrl(entity.getInvoiceConfirmationUrl())
                 .callbackUrl(entity.getCallbackUrl())
                 .build();

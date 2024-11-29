@@ -1,5 +1,6 @@
 package com.invoice.expert;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -21,28 +22,35 @@ public class InvoiceExpert {
 
     public void create(InvoiceDTO invoiceDTO) {
         try {
-            ObjectMapper objectMapper = new ObjectMapper();
             InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(invoiceDTO.getInvoiceConfigurationCode());
-            String invoiceConfigurationJson = objectMapper.writeValueAsString(invoiceConfiguration);
-            ObjectNode invoiceConfigurationNode = (ObjectNode) objectMapper.readTree(invoiceConfigurationJson);
-            JsonNode serviceCode = invoiceConfigurationNode.get("serviceCode");
-            JsonNode entityTypeCode = invoiceConfigurationNode.get("entityTypeCode");
-            JsonNode ledgerAlias = invoiceConfigurationNode.get("ledgerAlias");
-            JsonNode sourceSystemCode = invoiceConfigurationNode.get("sourceSystemCode");
-
-            String invoiceJson = objectMapper.writeValueAsString(invoiceDTO);
-            ObjectNode invoiceNode = (ObjectNode) objectMapper.readTree(invoiceJson);
-            invoiceNode.put("sourceSystemCode", sourceSystemCode.asText());
-            invoiceNode.remove("invoiceConfigurationCode");
-            invoiceNode.get("invoiceLineDetail").forEach(invoiceLineDetail -> {
-                ((ObjectNode)invoiceLineDetail).put("ledgerAlias", ledgerAlias.asText());
-                ((ObjectNode)invoiceLineDetail).put("serviceCode", serviceCode.asText());
-                ((ObjectNode)invoiceLineDetail).put("entityTypeCode", entityTypeCode.asText());
-                    });
-            invoiceAdapter.createInvoice(objectMapper.writeValueAsString(invoiceNode));
+            String invoice = createInvoiceJson(invoiceDTO, invoiceConfiguration);
+            invoiceAdapter.createInvoice(invoice);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private String createInvoiceJson(InvoiceDTO invoiceDTO, InvoiceConfiguration invoiceConfiguration) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String invoiceConfigurationJson = objectMapper.writeValueAsString(invoiceConfiguration);
+        ObjectNode invoiceConfigurationNode = (ObjectNode) objectMapper.readTree(invoiceConfigurationJson);
+        JsonNode serviceCode = invoiceConfigurationNode.get("serviceCode");
+        JsonNode entityTypeCode = invoiceConfigurationNode.get("entityTypeCode");
+        JsonNode ledgerAlias = invoiceConfigurationNode.get("ledgerAlias");
+        JsonNode sourceSystemCode = invoiceConfigurationNode.get("sourceSystemCode");
+        JsonNode serviceProviderCode = invoiceConfigurationNode.get("serviceProviderCode");
+
+        String invoiceJson = objectMapper.writeValueAsString(invoiceDTO);
+        ObjectNode invoiceNode = (ObjectNode) objectMapper.readTree(invoiceJson);
+        invoiceNode.put("sourceSystemCode", sourceSystemCode.asText());
+        invoiceNode.put("serviceProviderCode", serviceProviderCode.asText());
+        invoiceNode.remove("invoiceConfigurationCode");
+        invoiceNode.get("invoiceLineDetail").forEach(invoiceLineDetail -> {
+            ((ObjectNode)invoiceLineDetail).put("ledgerAlias", ledgerAlias.asText());
+            ((ObjectNode)invoiceLineDetail).put("serviceCode", serviceCode.asText());
+            ((ObjectNode)invoiceLineDetail).put("entityTypeCode", entityTypeCode.asText());
+                });
+        return objectMapper.writeValueAsString(invoiceNode);
     }
 
 

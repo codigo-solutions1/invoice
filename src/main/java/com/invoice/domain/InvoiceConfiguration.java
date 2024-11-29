@@ -27,7 +27,7 @@ public class InvoiceConfiguration {
     private final String ledgerAlias;
     @NotEmpty
     private final String invoiceConfirmationUrl;
-
+    private final String serviceProviderCode;
     private final String callbackUrl;
 
 
