@@ -14,6 +14,7 @@ public class InvoiceConfigurationDTO {
     private UUID id;
     private String invoiceConfigurationCode;
     private String serviceCode;
+    private String sourceSystemCode;
     private String entityTypeCode;
     private String ledgerAlias;
     private String invoiceConfirmationUrl;

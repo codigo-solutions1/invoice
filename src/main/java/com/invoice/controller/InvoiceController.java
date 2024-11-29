@@ -1,6 +1,5 @@
 package com.invoice.controller;
 
-import com.invoice.domain.Invoice;
 import com.invoice.dto.ResponseDTO;
 import com.invoice.dto.invoice.InvoiceDTO;
 import com.invoice.handler.InvoiceHandler;
