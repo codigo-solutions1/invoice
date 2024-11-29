@@ -20,6 +20,8 @@ public class InvoiceConfiguration {
     @NotEmpty
     private final String serviceCode;
     @NotEmpty
+    private final String sourceSystemCode;
+    @NotEmpty
     private final String entityTypeCode;
     @NotEmpty
     private final String ledgerAlias;
