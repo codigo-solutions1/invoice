@@ -13,6 +13,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -32,8 +35,25 @@ public class InvoiceExpert {
     }
 
     public void cancel(String invoiceConfigCode, InvoiceCriteriaDTO invoiceCriteriaDTO) {
-        InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(invoiceConfigCode);
+        try {
+            InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(invoiceConfigCode);
+            String invoice = cancelInvoiceJson(invoiceCriteriaDTO, invoiceConfiguration);
+            invoiceAdapter.cancelInvoice(invoice);
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
+    }
+
+    private String cancelInvoiceJson(InvoiceCriteriaDTO invoiceCriteriaDTO, InvoiceConfiguration invoiceConfiguration) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, Object> invoiceMap = new HashMap<>();
+        invoiceMap.put("sourceSysChannel", invoiceCriteriaDTO.getSourceSysChannel());
+        invoiceMap.put("ERADVoucherRefNo", invoiceCriteriaDTO.getERADVoucherRefNo());
+        String invoiceConfigJson = objectMapper.writeValueAsString(invoiceConfiguration);
+        invoiceMap.put("invoiceConfiguration", objectMapper.readTree(invoiceConfigJson));
+        return objectMapper.writeValueAsString(invoiceMap);
     }
 
     private String createInvoiceJson(InvoiceDTO invoiceDTO, InvoiceConfiguration invoiceConfiguration) throws JsonProcessingException {

@@ -1,5 +1,6 @@
 package com.invoice.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.invoice.dto.ResponseDTO;
 import com.invoice.dto.InvoiceCriteriaDTO;
 import com.invoice.dto.invoice.InvoiceDTO;
@@ -35,7 +36,7 @@ public class InvoiceController {
                     @ApiResponse(responseCode = "400", description = "Invalid input data")})
     @PostMapping( "/{invoiceConfigCode}/cancel")
     public ResponseEntity<ResponseDTO> cancelInvoice(@PathVariable String invoiceConfigCode,
-                                                     @RequestBody InvoiceCriteriaDTO invoiceCriteriaDTO) {
+                                                     @RequestBody InvoiceCriteriaDTO invoiceCriteriaDTO){
         ResponseDTO response = invoiceHandler.cancelInvoice(invoiceConfigCode, invoiceCriteriaDTO);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
