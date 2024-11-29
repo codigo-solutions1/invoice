@@ -38,23 +38,15 @@ public class InvoiceExpert {
 
     private String createInvoiceJson(InvoiceDTO invoiceDTO, InvoiceConfiguration invoiceConfiguration) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String invoiceConfigurationJson = objectMapper.writeValueAsString(invoiceConfiguration);
-        ObjectNode invoiceConfigurationNode = (ObjectNode) objectMapper.readTree(invoiceConfigurationJson);
-        JsonNode serviceCode = invoiceConfigurationNode.get("serviceCode");
-        JsonNode entityTypeCode = invoiceConfigurationNode.get("entityTypeCode");
-        JsonNode ledgerAlias = invoiceConfigurationNode.get("ledgerAlias");
-        JsonNode sourceSystemCode = invoiceConfigurationNode.get("sourceSystemCode");
-        JsonNode serviceProviderCode = invoiceConfigurationNode.get("serviceProviderCode");
-
         String invoiceJson = objectMapper.writeValueAsString(invoiceDTO);
         ObjectNode invoiceNode = (ObjectNode) objectMapper.readTree(invoiceJson);
-        invoiceNode.put("sourceSystemCode", sourceSystemCode.asText());
-        invoiceNode.put("serviceProviderCode", serviceProviderCode.asText());
+        invoiceNode.put("sourceSystemCode", invoiceConfiguration.getSourceSystemCode());
+        invoiceNode.put("serviceProviderCode", invoiceConfiguration.getServiceProviderCode());
         invoiceNode.remove("invoiceConfigurationCode");
         invoiceNode.get("invoiceLineDetail").forEach(invoiceLineDetail -> {
-            ((ObjectNode)invoiceLineDetail).put("ledgerAlias", ledgerAlias.asText());
-            ((ObjectNode)invoiceLineDetail).put("serviceCode", serviceCode.asText());
-            ((ObjectNode)invoiceLineDetail).put("entityTypeCode", entityTypeCode.asText());
+            ((ObjectNode)invoiceLineDetail).put("ledgerAlias", invoiceConfiguration.getLedgerAlias());
+            ((ObjectNode)invoiceLineDetail).put("serviceCode", invoiceConfiguration.getServiceCode());
+            ((ObjectNode)invoiceLineDetail).put("entityTypeCode", invoiceConfiguration.getEntityTypeCode());
                 });
         return objectMapper.writeValueAsString(invoiceNode);
     }
