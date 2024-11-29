@@ -10,10 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "Invoice Controller", description = "API for managing invoices")
 @RestController
@@ -36,9 +33,10 @@ public class InvoiceController {
     @Operation(summary = "Cancel invoice", description = "This endpoint allows you to cancel invoice.",
             responses = {@ApiResponse(responseCode = "200", description = "Canceled invoice successfully"),
                     @ApiResponse(responseCode = "400", description = "Invalid input data")})
-    @PostMapping( "/cancel")
-    public ResponseEntity<ResponseDTO> cancelInvoice(@RequestBody InvoiceCriteriaDTO invoiceCriteriaDTO) {
-        ResponseDTO response = invoiceHandler.cancelInvoice(invoiceCriteriaDTO);
+    @PostMapping( "/{invoiceConfigCode}/cancel")
+    public ResponseEntity<ResponseDTO> cancelInvoice(@PathVariable String invoiceConfigCode,
+                                                     @RequestBody InvoiceCriteriaDTO invoiceCriteriaDTO) {
+        ResponseDTO response = invoiceHandler.cancelInvoice(invoiceConfigCode, invoiceCriteriaDTO);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 }

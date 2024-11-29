@@ -21,8 +21,8 @@ public class InvoiceHandler {
         return new ResponseDTO();
     }
 
-    public ResponseDTO cancelInvoice(InvoiceCriteriaDTO invoiceCriteriaDTO) {
-        invoiceExpert.cancel(invoiceCriteriaDTO);
+    public ResponseDTO cancelInvoice(String invoiceConfigCode, InvoiceCriteriaDTO invoiceCriteriaDTO) {
+        invoiceExpert.cancel(invoiceConfigCode, invoiceCriteriaDTO);
         return new ResponseDTO();
     }
 

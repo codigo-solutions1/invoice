@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class InvoiceCriteriaDTO {
-    private String invoiceConfigCode;
     private String sourceSysChannel;
     private String ERADVoucherRefNo;
 }

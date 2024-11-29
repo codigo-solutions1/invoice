@@ -31,7 +31,8 @@ public class InvoiceExpert {
         }
     }
 
-    public void cancel(InvoiceCriteriaDTO invoiceCriteriaDTO) {
+    public void cancel(String invoiceConfigCode, InvoiceCriteriaDTO invoiceCriteriaDTO) {
+        InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(invoiceConfigCode);
 
     }
 
