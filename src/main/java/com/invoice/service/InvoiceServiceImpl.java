@@ -1,4 +1,5 @@
 package com.invoice.service;
+import com.invoice.adapter.InvoiceAdapter;
 import com.invoice.domain.invoice.Invoice;
 import com.invoice.repository.InvoiceRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,12 +14,13 @@ import org.springframework.stereotype.Service;
     @Service
     public class InvoiceServiceImpl implements InvoiceService{
         private final InvoiceRepository invoiceRepository;
+        private final InvoiceAdapter invoiceAdapter;
 
         @Override
         public Invoice createInvoice(Invoice invoice) {
-
-
-            return invoiceRepository.save(invoice);
+            Invoice savedInvoice = invoiceRepository.save(invoice);
+            invoiceAdapter.createInvoice(String.valueOf(savedInvoice));
+            return savedInvoice;
         }
 
     }
