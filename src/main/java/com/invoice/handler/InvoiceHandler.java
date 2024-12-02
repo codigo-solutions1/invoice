@@ -1,8 +1,8 @@
 package com.invoice.handler;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.invoice.dto.ResponseDTO;
 import com.invoice.dto.InvoiceCriteriaDTO;
+import com.invoice.dto.InvoiceResponseDTO;
+import com.invoice.dto.ResponseDTO;
 import com.invoice.dto.invoice.InvoiceDTO;
 import com.invoice.expert.InvoiceExpert;
 import com.invoice.validator.InvoiceValidator;
@@ -16,15 +16,22 @@ public class InvoiceHandler {
     private final InvoiceValidator invoiceValidator;
     private final InvoiceExpert invoiceExpert;
 
-    public ResponseDTO createInvoice(InvoiceDTO invoiceDTO) {
+    public InvoiceResponseDTO createInvoice(InvoiceDTO invoiceDTO) {
         invoiceValidator.validate(invoiceDTO);
         invoiceExpert.create(invoiceDTO);
-        return new ResponseDTO();
+        return InvoiceResponseDTO.builder()
+                .responseCode("200")
+                .description("Data saved successfully")
+                .UPRSInvoiceNo("")
+                .build();
     }
 
     public ResponseDTO cancelInvoice(String invoiceConfigCode, InvoiceCriteriaDTO invoiceCriteriaDTO){
         invoiceExpert.cancel(invoiceConfigCode, invoiceCriteriaDTO);
-        return new ResponseDTO();
+        return ResponseDTO.builder()
+                .responseCode("200")
+                .description("Data saved successfully")
+                .build();
     }
 
 }

@@ -1,6 +1,7 @@
 package com.invoice.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.invoice.dto.InvoiceResponseDTO;
 import com.invoice.dto.ResponseDTO;
 import com.invoice.dto.InvoiceCriteriaDTO;
 import com.invoice.dto.invoice.InvoiceDTO;
@@ -26,8 +27,8 @@ public class InvoiceController {
             responses = {@ApiResponse(responseCode = "200", description = "Invoice configuration created successfully"),
                     @ApiResponse(responseCode = "400", description = "Invalid input data")})
     @PostMapping
-    public ResponseEntity<ResponseDTO> createInvoice(@RequestBody InvoiceDTO dto) {
-        ResponseDTO response = invoiceHandler.createInvoice(dto);
+    public ResponseEntity<InvoiceResponseDTO> createInvoice(@RequestBody InvoiceDTO dto) {
+        InvoiceResponseDTO response = invoiceHandler.createInvoice(dto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
