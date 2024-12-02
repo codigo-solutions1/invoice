@@ -1,9 +1,7 @@
 package com.invoice.handler;
 
-import com.invoice.domain.InvoiceConfiguration;
 import com.invoice.domain.invoice.Invoice;
 import com.invoice.dto.InvoiceCriteriaDTO;
-import com.invoice.dto.InvoiceResponseDTO;
 import com.invoice.dto.ResponseDTO;
 import com.invoice.dto.invoice.InvoiceDTO;
 import com.invoice.expert.InvoiceExpert;
@@ -11,6 +9,7 @@ import com.invoice.transformer.InvoiceTransformer;
 import com.invoice.validator.InvoiceValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import com.invoice.service.InvoiceService;
 
 @Component
 @RequiredArgsConstructor
@@ -18,20 +17,14 @@ public class InvoiceHandler {
 
     private final InvoiceValidator invoiceValidator;
     private final InvoiceTransformer invoiceTransformer;
-    private final Invoice invoice;
     private final InvoiceService invoiceService;
+    private final InvoiceExpert invoiceExpert;
 
-    public InvoiceResponseDTO createInvoice(InvoiceDTO model) {
+    public InvoiceDTO createInvoice(InvoiceDTO model) {
         invoiceValidator.validate(model);
-        //invoiceExpert.create(invoiceDTO);
         Invoice invoice = invoiceTransformer.toEntity(model);
-        InvoiceConfiguration configurationFromDB = invoiceService.createInvoice(invoice);
-        return invoiceTransformer.toModel(configurationFromDB);
-        //return InvoiceResponseDTO.builder()
-                //.responseCode("200")
-                //.description("Data saved successfully")
-                //.UPRSInvoiceNo("")
-                //.build();
+        Invoice invoiceFromDB = invoiceService.createInvoice(invoice);
+        return invoiceTransformer.toModel(invoiceFromDB);
     }
 
     public ResponseDTO cancelInvoice(String invoiceConfigCode, InvoiceCriteriaDTO invoiceCriteriaDTO){

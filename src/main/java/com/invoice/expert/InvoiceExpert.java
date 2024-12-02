@@ -3,7 +3,7 @@ package com.invoice.expert;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.invoice.adapter.InvoiceAdapter;
+//import com.invoice.adapter.InvoiceAdapter;
 import com.invoice.domain.InvoiceConfiguration;
 import com.invoice.dto.InvoiceCriteriaDTO;
 import com.invoice.dto.invoice.InvoiceDTO;
@@ -18,13 +18,13 @@ import org.springframework.stereotype.Component;
 public class InvoiceExpert {
 
     private final InvoiceConfigurationService invoiceConfigurationService;
-    private final InvoiceAdapter invoiceAdapter;
+//    private final InvoiceAdapter invoiceAdapter;
 
     public void create(InvoiceDTO invoiceDTO) {
         try {
             InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(invoiceDTO.getInvoiceConfigurationCode());
             String invoice = createInvoiceJson(invoiceDTO, invoiceConfiguration);
-            invoiceAdapter.createInvoice(invoice);
+//            invoiceAdapter.createInvoice(invoice);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -35,7 +35,7 @@ public class InvoiceExpert {
             invoiceConfigurationService.findByConfigurationCode(invoiceConfigCode);
             ObjectMapper objectMapper = new ObjectMapper();
             String invoiceJson = objectMapper.writeValueAsString(invoiceCriteriaDTO);
-            invoiceAdapter.cancelInvoice(invoiceJson);
+//            invoiceAdapter.cancelInvoice(invoiceJson);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

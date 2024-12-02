@@ -27,9 +27,9 @@ public class InvoiceController {
             responses = {@ApiResponse(responseCode = "200", description = "Invoice configuration created successfully"),
                     @ApiResponse(responseCode = "400", description = "Invalid input data")})
     @PostMapping
-    public ResponseEntity<InvoiceResponseDTO> createInvoice(@RequestBody InvoiceDTO dto) {
-        InvoiceResponseDTO response = invoiceHandler.createInvoice(dto);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    public ResponseEntity createInvoice(@RequestBody InvoiceDTO dto) {
+        InvoiceDTO response = invoiceHandler.createInvoice(dto);
+        return ResponseEntity.ok(response);
     }
 
     @Operation(summary = "Cancel invoice", description = "This endpoint allows you to cancel invoice.",

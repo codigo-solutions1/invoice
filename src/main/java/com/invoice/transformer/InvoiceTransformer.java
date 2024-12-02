@@ -36,7 +36,7 @@ public class InvoiceTransformer implements Transformer<InvoiceDTO, Invoice> {
                         .map(invoiceLineDetailTransformer::toEntity)
                         .collect(Collectors.toList())
                         : null)
-                .build(); // Adjusted for model type
+                .build();
     }
 
     @Override

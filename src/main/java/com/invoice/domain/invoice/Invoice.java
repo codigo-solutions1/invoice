@@ -18,7 +18,7 @@ import java.util.UUID;
 @Document(collection = "invoice")
 public class Invoice {
     @Id
-    private UUID Id;
+    private UUID id;
     @NotNull(message = "Source system app reference number is required")
     private String sourceSystemAppRefNo;
     @NotNull(message = "Source system voucher number is required")
