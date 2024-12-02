@@ -1,20 +1,24 @@
-package com.invoice.dto.invoice;
+package com.invoice.domain.invoice;
 
+import com.invoice.dto.invoice.CustomerDetailDTO;
+import com.invoice.dto.invoice.InvoiceLineDetailDTO;
+import com.invoice.dto.invoice.ReserveAttributeDTO;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 import java.util.UUID;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
 @Builder
-public class InvoiceDTO {
-    private UUID id;
+@Document(collection = "invoice")
+public class Invoice {
+    @Id
+    private UUID Id;
     @NotNull(message = "Source system app reference number is required")
     private String sourceSystemAppRefNo;
     @NotNull(message = "Source system voucher number is required")
@@ -27,11 +31,7 @@ public class InvoiceDTO {
     private String description;
     private String language;
     private String sourceSysChannel;
-    private CustomerDetailDTO customerDetail;
-    private List<InvoiceLineDetailDTO> invoiceLineDetail;
-    private ReserveAttributeDTO reserveAttribute;
-
-    public UUID getId(){
-        return id == null? UUID.randomUUID() : id;
-    }
+    private CustomerDetail customerDetail;
+    private List<InvoiceLineDetail> invoiceLineDetail;
+    private ReserveAttribute reserveAttribute;
 }
