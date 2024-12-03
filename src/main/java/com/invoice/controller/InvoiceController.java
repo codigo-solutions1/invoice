@@ -1,7 +1,7 @@
 package com.invoice.controller;
 
-import com.invoice.dto.ResponseDTO;
 import com.invoice.dto.InvoiceCriteriaDTO;
+import com.invoice.dto.ResponseDTO;
 import com.invoice.dto.invoice.InvoiceDTO;
 import com.invoice.handler.InvoiceHandler;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,9 +33,9 @@ public class InvoiceController {
     @Operation(summary = "Cancel invoice", description = "This endpoint allows you to cancel invoice.",
             responses = {@ApiResponse(responseCode = "200", description = "Canceled invoice successfully"),
                     @ApiResponse(responseCode = "400", description = "Invalid input data")})
-    @PostMapping( "/{invoiceConfigCode}/cancel")
+    @PostMapping("/{invoiceConfigCode}/cancel")
     public ResponseEntity<ResponseDTO> cancelInvoice(@PathVariable String invoiceConfigCode,
-                                                     @RequestBody InvoiceCriteriaDTO invoiceCriteriaDTO){
+                                                     @RequestBody InvoiceCriteriaDTO invoiceCriteriaDTO) {
         ResponseDTO response = invoiceHandler.cancelInvoice(invoiceConfigCode, invoiceCriteriaDTO);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
