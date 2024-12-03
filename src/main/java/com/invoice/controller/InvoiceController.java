@@ -25,7 +25,7 @@ public class InvoiceController {
             responses = {@ApiResponse(responseCode = "200", description = "Invoice configuration created successfully"),
                     @ApiResponse(responseCode = "400", description = "Invalid input data")})
     @PostMapping
-    public ResponseEntity createInvoice(@RequestBody InvoiceDTO dto) {
+    public ResponseEntity<InvoiceDTO> createInvoice(@RequestBody InvoiceDTO dto) {
         InvoiceDTO response = invoiceHandler.createInvoice(dto);
         return ResponseEntity.ok(response);
     }
