@@ -1,5 +1,6 @@
 package com.invoice.adapter;
 
+import com.invoice.domain.invoice.Invoice;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +19,7 @@ public class InvoiceAdapter {
     @Value("${url}")
     private String apiUrl;
 
-    public void createInvoice(String invoice) {
+    public void createInvoice(Invoice invoice) {
         String url = apiUrl + "/create-invoice";
         try {
             HttpClient client = HttpClient.newHttpClient();

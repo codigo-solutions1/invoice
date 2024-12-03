@@ -11,37 +11,41 @@ public class CustomerDetailTransformer implements Transformer<CustomerDetailDTO,
 
     @Override
     public CustomerDetail toEntity(CustomerDetailDTO model) {
-        if (model == null) {
-            return null;
+
+        CustomerDetail.CustomerDetailBuilder builder = CustomerDetail.builder();
+        builder.authenticated(model.getAuthenticated());
+
+        if (model.getAuthenticated()) {
+            builder.customerType(model.getCustomerType());
+            builder.umUserId(model.getUmUserId());
+            builder.licenseNo(model.getLicenseNo());
+        } else {
+            builder.fullName(model.getFullName());
+            builder.phoneNumber(model.getPhoneNumber());
+            builder.email(model.getEmail());
+            builder.emiratesId(model.getEmiratesId());
         }
 
-        return CustomerDetail.builder()
-                .authenticated(model.getAuthenticated())
-                .customerType(model.getCustomerType())
-                .umUserId(model.getUmUserId())
-                .licenseNo(model.getLicenseNo())
-                .fullName(model.getFullName())
-                .phoneNumber(model.getPhoneNumber())
-                .email(model.getEmail())
-                .emiratesId(model.getEmiratesId())
-                .build();
+        return builder.build();
     }
 
     @Override
     public CustomerDetailDTO toModel(CustomerDetail entity) {
-        if (entity == null) {
-            return null;
-        }
 
         CustomerDetailDTO dto = new CustomerDetailDTO();
         dto.setAuthenticated(entity.getAuthenticated());
-        dto.setCustomerType(entity.getCustomerType());
-        dto.setUmUserId(entity.getUmUserId());
-        dto.setLicenseNo(entity.getLicenseNo());
-        dto.setFullName(entity.getFullName());
-        dto.setPhoneNumber(entity.getPhoneNumber());
-        dto.setEmail(entity.getEmail());
-        dto.setEmiratesId(entity.getEmiratesId());
+
+        if (entity.getAuthenticated()) {
+            dto.setCustomerType(entity.getCustomerType());
+            dto.setUmUserId(entity.getUmUserId());
+            dto.setLicenseNo(entity.getLicenseNo());
+        } else {
+            dto.setFullName(entity.getFullName());
+            dto.setPhoneNumber(entity.getPhoneNumber());
+            dto.setEmail(entity.getEmail());
+            dto.setEmiratesId(entity.getEmiratesId());
+        }
+
         return dto;
     }
 }

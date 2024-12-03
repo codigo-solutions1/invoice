@@ -6,7 +6,7 @@ import lombok.experimental.SuperBuilder;
 class CanceledInvoice extends Invoice {
     @Override
     public Invoice submit() {
-        return null;
+        throw new IllegalStateException("Canceled invoice cannot be submitted");
     }
 
     @Override

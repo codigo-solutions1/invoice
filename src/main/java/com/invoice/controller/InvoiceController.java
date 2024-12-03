@@ -30,7 +30,7 @@ public class InvoiceController {
         return ResponseEntity.ok(response);
     }
 
-    @Operation(summary = "Cancel invoice", description = "This endpoint allows you to cancel invoice.",
+    @Operation(summary = "Cancel invoice", description = "This endpoint allows you to cancel an invoice.",
             responses = {@ApiResponse(responseCode = "200", description = "Canceled invoice successfully"),
                     @ApiResponse(responseCode = "400", description = "Invalid input data")})
     @PostMapping("/{invoiceConfigCode}/cancel")
@@ -40,5 +40,3 @@ public class InvoiceController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 }
-
-
