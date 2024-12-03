@@ -1,9 +1,8 @@
 package com.invoice.transformer;
 
-import com.invoice.domain.InvoiceConfiguration;
 import com.invoice.domain.invoice.Invoice;
+import com.invoice.domain.invoice.SubmittedInvoice;
 import com.invoice.dto.invoice.InvoiceDTO;
-import com.invoice.dto.InvoiceConfigurationDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -20,14 +19,14 @@ public class InvoiceTransformer implements Transformer<InvoiceDTO, Invoice> {
 
     @Override
     public Invoice toEntity(InvoiceDTO model) {
-        return Invoice.builder()
+        return SubmittedInvoice.builder()
                 .id(model.getId())
                 .sourceSystemAppRefNo(model.getSourceSystemAppRefNo())
                 .sourceSysVoucherNo(model.getSourceSysVoucherNo())
                 .sourceSysAppRefDate(model.getSourceSysAppRefDate())
-                .invoiceConfigurationCode(model.getInvoiceConfigurationCode())
                 .description(model.getDescription())
                 .language(model.getLanguage())
+                .configurationCode(model.getInvoiceConfigurationCode())
                 .sourceSysChannel(model.getSourceSysChannel())
                 .customerDetail(customerDetailTransformer.toEntity(model.getCustomerDetail()))
                 .reserveAttribute(reserveAttributeTransformer.toEntity(model.getReserveAttribute()))
@@ -46,9 +45,9 @@ public class InvoiceTransformer implements Transformer<InvoiceDTO, Invoice> {
                 .sourceSystemAppRefNo(entity.getSourceSystemAppRefNo())
                 .sourceSysVoucherNo(entity.getSourceSysVoucherNo())
                 .sourceSysAppRefDate(entity.getSourceSysAppRefDate())
-                .invoiceConfigurationCode(entity.getInvoiceConfigurationCode())
                 .description(entity.getDescription())
                 .language(entity.getLanguage())
+                .invoiceConfigurationCode(entity.getConfigurationCode())
                 .sourceSysChannel(entity.getSourceSysChannel())
                 .customerDetail(customerDetailTransformer.toModel(entity.getCustomerDetail()))
                 .reserveAttribute(reserveAttributeTransformer.toModel(entity.getReserveAttribute()))

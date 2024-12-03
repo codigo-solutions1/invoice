@@ -1,22 +1,21 @@
 package com.invoice.domain.invoice;
 
-import com.invoice.dto.invoice.CustomerDetailDTO;
-import com.invoice.dto.invoice.InvoiceLineDetailDTO;
-import com.invoice.dto.invoice.ReserveAttributeDTO;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 import java.util.UUID;
 
 @Getter
-@Builder
+@SuperBuilder
 @Document(collection = "invoice")
-public class Invoice {
+public abstract class Invoice {
     @Id
     private UUID id;
     @NotNull(message = "Source system app reference number is required")
@@ -25,8 +24,6 @@ public class Invoice {
     private String sourceSysVoucherNo;
     @NotNull(message = "Source system app reference date is required")
     private String sourceSysAppRefDate;
-    @NotNull(message = "Source system configuration code is required")
-    private String invoiceConfigurationCode;
     @NotNull(message = "Description is required")
     private String description;
     private String language;
@@ -34,4 +31,14 @@ public class Invoice {
     private CustomerDetail customerDetail;
     private List<InvoiceLineDetail> invoiceLineDetail;
     private ReserveAttribute reserveAttribute;
+    @Transient
+    @Setter
+    private String configurationCode;
+
+
+    public abstract Invoice submit();
+
+    public abstract Invoice cancel();
+
+    public abstract InvoiceStatus getStatus();
 }

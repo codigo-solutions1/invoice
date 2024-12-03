@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 //import com.invoice.adapter.InvoiceAdapter;
+import com.invoice.adapter.InvoiceAdapter;
 import com.invoice.domain.InvoiceConfiguration;
+import com.invoice.domain.invoice.Invoice;
 import com.invoice.dto.InvoiceCriteriaDTO;
 import com.invoice.dto.invoice.InvoiceDTO;
 import com.invoice.service.InvoiceConfigurationService;
@@ -15,15 +17,14 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class InvoiceExpert {
+public class LegacyInvoiceExpert {
 
     private final InvoiceConfigurationService invoiceConfigurationService;
-//    private final InvoiceAdapter invoiceAdapter;
+    private final InvoiceAdapter invoiceAdapter;
 
-    public void create(InvoiceDTO invoiceDTO) {
+    public void create(Invoice invoice) {
         try {
-            InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(invoiceDTO.getInvoiceConfigurationCode());
-            String invoice = createInvoiceJson(invoiceDTO, invoiceConfiguration);
+            InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(invoice.getConfigurationCode());
 //            invoiceAdapter.createInvoice(invoice);
         } catch (Exception e) {
             throw new RuntimeException(e);
