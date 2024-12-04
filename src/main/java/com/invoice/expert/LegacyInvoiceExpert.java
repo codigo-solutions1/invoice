@@ -25,7 +25,8 @@ public class LegacyInvoiceExpert {
     public void create(Invoice invoice) {
         try {
             InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(invoice.getConfigurationCode());
-//            invoiceAdapter.createInvoice(invoice);
+            String jsonInvoice = createInvoiceJson(invoice, invoiceConfiguration);
+            invoiceAdapter.createInvoice(jsonInvoice);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -43,7 +44,7 @@ public class LegacyInvoiceExpert {
 
     }
 
-    private String createInvoiceJson(InvoiceDTO invoiceDTO, InvoiceConfiguration invoiceConfiguration) throws JsonProcessingException {
+    private String createInvoiceJson(Invoice invoiceDTO, InvoiceConfiguration invoiceConfiguration) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         String invoiceJson = objectMapper.writeValueAsString(invoiceDTO);
         ObjectNode invoiceNode = (ObjectNode) objectMapper.readTree(invoiceJson);
