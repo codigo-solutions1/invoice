@@ -1,6 +1,7 @@
 package com.invoice.controller;
 
 import com.invoice.dto.InvoiceCriteriaDTO;
+import com.invoice.dto.InvoiceResponseDTO;
 import com.invoice.dto.ResponseDTO;
 import com.invoice.dto.invoice.InvoiceDTO;
 import com.invoice.handler.InvoiceHandler;
@@ -25,8 +26,8 @@ public class InvoiceController {
             responses = {@ApiResponse(responseCode = "200", description = "Invoice configuration created successfully"),
                     @ApiResponse(responseCode = "400", description = "Invalid input data")})
     @PostMapping
-    public ResponseEntity<InvoiceDTO> createInvoice(@RequestBody InvoiceDTO dto) {
-        InvoiceDTO response = invoiceHandler.createInvoice(dto);
+    public ResponseEntity<InvoiceResponseDTO> createInvoice(@RequestBody InvoiceDTO dto) {
+        InvoiceResponseDTO response = invoiceHandler.createInvoice(dto);
         return ResponseEntity.ok(response);
     }
 
