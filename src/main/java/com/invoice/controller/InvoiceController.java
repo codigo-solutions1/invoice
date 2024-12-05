@@ -25,7 +25,7 @@ public class InvoiceController {
             description = "This endpoint allows you to create a new invoice configuration.",
             responses = {@ApiResponse(responseCode = "200", description = "Invoice configuration created successfully"),
                     @ApiResponse(responseCode = "400", description = "Invalid input data")})
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<InvoiceResponseDTO> createInvoice(@RequestBody InvoiceDTO dto) {
         InvoiceResponseDTO response = invoiceHandler.createInvoice(dto);
         return ResponseEntity.ok(response);
@@ -34,10 +34,9 @@ public class InvoiceController {
     @Operation(summary = "Cancel invoice", description = "This endpoint allows you to cancel an invoice.",
             responses = {@ApiResponse(responseCode = "200", description = "Canceled invoice successfully"),
                     @ApiResponse(responseCode = "400", description = "Invalid input data")})
-    @PostMapping("/{invoiceConfigCode}/cancel")
-    public ResponseEntity<ResponseDTO> cancelInvoice(@PathVariable String invoiceConfigCode,
-                                                     @RequestBody InvoiceCriteriaDTO invoiceCriteriaDTO) {
-        ResponseDTO response = invoiceHandler.cancelInvoice(invoiceConfigCode, invoiceCriteriaDTO);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+    @PostMapping("/cancel")
+    public ResponseEntity<ResponseDTO> cancelInvoice(@RequestBody InvoiceCriteriaDTO invoiceCriteriaDTO) {
+//        ResponseDTO response = invoiceHandler.cancelInvoice(invoiceCriteriaDTO);
+        return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 }

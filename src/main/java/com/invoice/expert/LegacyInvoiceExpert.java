@@ -24,6 +24,7 @@ public class LegacyInvoiceExpert {
 
     public void create(Invoice invoice) {
         try {
+            //TODO: add invoiceConfigurationType
             InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(invoice.getConfigurationCode());
             String jsonInvoice = createInvoiceJson(invoice, invoiceConfiguration);
             invoiceAdapter.createInvoice(jsonInvoice);

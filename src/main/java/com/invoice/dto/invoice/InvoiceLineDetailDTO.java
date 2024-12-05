@@ -11,5 +11,6 @@ import java.math.BigDecimal;
 public class InvoiceLineDetailDTO {
     @NotNull(message = "Fee is required")
     private BigDecimal fee;
+    //TODO: Should be default as 1
     private int quantity;
 }
