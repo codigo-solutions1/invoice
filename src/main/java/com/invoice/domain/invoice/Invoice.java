@@ -1,5 +1,6 @@
 package com.invoice.domain.invoice;
 
+import com.invoice.domain.InvoiceConfiguration;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,6 +35,9 @@ public abstract class Invoice {
     @Transient
     @Setter
     private String configurationCode;
+    @Transient
+    @Setter
+    private InvoiceConfiguration invoiceConfiguration;
 
 
     public abstract Invoice submit();

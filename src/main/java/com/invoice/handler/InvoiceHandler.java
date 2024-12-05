@@ -30,6 +30,9 @@ public class InvoiceHandler {
         Invoice invoice = invoiceTransformer.toEntity(model);
         Invoice invoiceFromDB = invoiceService.createInvoice(invoice);
         legacyInvoiceExpert.create(invoiceFromDB);
+        //TODO: User configuration to send to response from here
+        InvoiceConfiguration configuration = invoice.getInvoiceConfiguration();
+        //TODO: Add Invoice DTO and Invoice Configuration DTO into Invoice Response DTO
         return InvoiceResponseDTO.builder()
                 .UPRSInvoiceNo(invoice.getId().toString())
                 .responseCode(String.valueOf(HttpStatus.CREATED.value()))

@@ -28,6 +28,7 @@ public class InvoiceController {
     @PostMapping("/create")
     public ResponseEntity<InvoiceResponseDTO> createInvoice(@RequestBody InvoiceDTO dto) {
         InvoiceResponseDTO response = invoiceHandler.createInvoice(dto);
+        //TODO: Add Invoice and Invoice configuration to Invoice Response DTO
         return ResponseEntity.ok(response);
     }
 
