@@ -2,6 +2,7 @@ package com.invoice.transformer;
 
 import com.invoice.domain.InvoiceConfiguration;
 import com.invoice.dto.InvoiceConfigurationDTO;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -9,19 +10,21 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class InvoiceConfigurationTransformer implements Transformer<InvoiceConfigurationDTO, InvoiceConfiguration> {
 
+    private final InvoiceConfigurationTypeTransformer invoiceConfigurationTypeTransformer;
 
     @Override
     public InvoiceConfiguration toEntity(InvoiceConfigurationDTO model) {
         return InvoiceConfiguration.builder()
                 .id(model.getId())
                 .invoiceConfigurationCode(model.getInvoiceConfigurationCode())
-                .serviceCode(model.getServiceCode())
+                .invoiceConfigurationType(invoiceConfigurationTypeTransformer.toEntity(model.getInvoiceConfigurationType()))
+                .createdDate(model.getCreatedDate())
+                .modifiedDate(model.getModifiedDate())
                 .sourceSystemCode(model.getSourceSystemCode())
-                .entityTypeCode(model.getEntityTypeCode())
-                .ledgerAlias(model.getLedgerAlias())
-                .invoiceConfirmationUrl(model.getInvoiceConfirmationUrl())
+                .paymentConfirmationUrl(model.getPaymentConfirmationUrl())
                 .serviceProviderCode(model.getServiceProviderCode())
                 .callbackUrl(model.getCallbackUrl())
+                .sourceSysChannel(model.getSourceSysChannel())
                 .build();
     }
 
@@ -30,14 +33,14 @@ public class InvoiceConfigurationTransformer implements Transformer<InvoiceConfi
         return InvoiceConfigurationDTO.builder()
                 .id(entity.getId())
                 .invoiceConfigurationCode(entity.getInvoiceConfigurationCode())
-                .serviceCode(entity.getServiceCode())
+                .invoiceConfigurationType(invoiceConfigurationTypeTransformer.toModel(entity.getInvoiceConfigurationType()))
+                .createdDate(entity.getCreatedDate())
+                .modifiedDate(entity.getModifiedDate())
                 .sourceSystemCode(entity.getSourceSystemCode())
-                .entityTypeCode(entity.getEntityTypeCode())
-                .ledgerAlias(entity.getLedgerAlias())
+                .paymentConfirmationUrl(entity.getPaymentConfirmationUrl())
                 .serviceProviderCode(entity.getServiceProviderCode())
-                .invoiceConfirmationUrl(entity.getInvoiceConfirmationUrl())
                 .callbackUrl(entity.getCallbackUrl())
+                .sourceSysChannel(entity.getSourceSysChannel())
                 .build();
     }
-
 }

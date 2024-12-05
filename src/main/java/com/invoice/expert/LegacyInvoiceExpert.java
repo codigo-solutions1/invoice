@@ -3,12 +3,10 @@ package com.invoice.expert;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-//import com.invoice.adapter.InvoiceAdapter;
 import com.invoice.adapter.InvoiceAdapter;
 import com.invoice.domain.InvoiceConfiguration;
 import com.invoice.domain.invoice.Invoice;
 import com.invoice.dto.InvoiceCriteriaDTO;
-import com.invoice.dto.invoice.InvoiceDTO;
 import com.invoice.service.InvoiceConfigurationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -53,9 +51,9 @@ public class LegacyInvoiceExpert {
         invoiceNode.put("serviceProviderCode", invoiceConfiguration.getServiceProviderCode());
         invoiceNode.remove("invoiceConfigurationCode");
         invoiceNode.get("invoiceLineDetail").forEach(invoiceLineDetail -> {
-            ((ObjectNode) invoiceLineDetail).put("ledgerAlias", invoiceConfiguration.getLedgerAlias());
-            ((ObjectNode) invoiceLineDetail).put("serviceCode", invoiceConfiguration.getServiceCode());
-            ((ObjectNode) invoiceLineDetail).put("entityTypeCode", invoiceConfiguration.getEntityTypeCode());
+            ((ObjectNode) invoiceLineDetail).put("ledgerAlias", invoiceConfiguration.getInvoiceConfigurationType().getLedgerAlias());
+            ((ObjectNode) invoiceLineDetail).put("serviceCode", invoiceConfiguration.getInvoiceConfigurationType().getServiceCode());
+            ((ObjectNode) invoiceLineDetail).put("entityTypeCode", invoiceConfiguration.getInvoiceConfigurationType().getEntityTypeCode());
         });
         return objectMapper.writeValueAsString(invoiceNode);
     }

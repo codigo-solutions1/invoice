@@ -15,7 +15,7 @@ import java.util.UUID;
 public class InvoiceConfigurationDTO {
     private UUID id;
     private String invoiceConfigurationCode;
-    private InvoiceConfigurationTypeDTO invoiceConfigurationTypeDTO;
+    private InvoiceConfigurationTypeDTO invoiceConfigurationType;
     private Instant createdDate;
     private Instant modifiedDate;
     private String sourceSystemCode;
