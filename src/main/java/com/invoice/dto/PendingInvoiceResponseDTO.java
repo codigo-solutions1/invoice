@@ -5,12 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CancelInvoiceCriteriaDTO {
-    private String invoiceConfigurationCode;
-    private String sourceSysChannel;
-    private String ERADVoucherRefNo;
+public class PendingInvoiceResponseDTO {
+
+    private List<PendingInvoiceDTO> pendingInvoices;
 }

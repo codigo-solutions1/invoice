@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CancelInvoiceCriteriaDTO {
-    private String invoiceConfigurationCode;
-    private String sourceSysChannel;
-    private String ERADVoucherRefNo;
+public class PendingInvoiceDTO {
+    private String invoiceNumber;
+    private String description;
+    private double amount;
+    private String issueDate;
+
 }
