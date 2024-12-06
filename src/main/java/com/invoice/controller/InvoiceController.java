@@ -1,8 +1,6 @@
 package com.invoice.controller;
 
-import com.invoice.dto.CancelInvoiceCriteriaDTO;
-import com.invoice.dto.InvoiceResponseDTO;
-import com.invoice.dto.ResponseDTO;
+import com.invoice.dto.*;
 import com.invoice.dto.invoice.InvoiceDTO;
 import com.invoice.handler.InvoiceHandler;
 import io.swagger.v3.oas.annotations.Operation;
@@ -26,8 +24,8 @@ public class InvoiceController {
             responses = {@ApiResponse(responseCode = "200", description = "Invoice configuration created successfully"),
                     @ApiResponse(responseCode = "400", description = "Invalid input data")})
     @PostMapping
-    public ResponseEntity<InvoiceResponseDTO> createInvoice(@RequestBody InvoiceDTO dto) {
-        InvoiceResponseDTO response = invoiceHandler.createInvoice(dto);
+    public ResponseEntity<InvoiceResponseDTO> createInvoice(@RequestBody InvoiceDTO request) {
+        InvoiceResponseDTO response = invoiceHandler.createInvoice(request);
         return ResponseEntity.ok(response);
     }
 
@@ -35,8 +33,17 @@ public class InvoiceController {
             responses = {@ApiResponse(responseCode = "200", description = "Canceled invoice successfully"),
                     @ApiResponse(responseCode = "400", description = "Invalid input data")})
     @PostMapping("/cancel")
-    public ResponseEntity<ResponseDTO> cancelInvoice(@RequestBody CancelInvoiceCriteriaDTO cancelInvoiceCriteriaDTO) {
-//        ResponseDTO response = invoiceHandler.cancelInvoice(invoiceCriteriaDTO);
+    public ResponseEntity<ResponseDTO> cancelInvoice(@RequestBody CancelInvoiceCriteriaDTO request) {
+        ResponseDTO response = invoiceHandler.cancelInvoice(request);
+        return new ResponseEntity<>(null, HttpStatus.CREATED);
+    }
+
+    @Operation(summary = "Inquire invoice", description = "This endpoint allows you to inquire an invoice.",
+            responses = {@ApiResponse(responseCode = "200", description = "Inquire invoice successfully"),
+                    @ApiResponse(responseCode = "400", description = "Invalid input data")})
+    @PostMapping("/inquire")
+    public ResponseEntity<InquireInvoiceResponseDTO> inquireInvoice(@RequestBody InquireInvoiceCriteriaDTO request) {
+        InquireInvoiceResponseDTO response = invoiceHandler.inquireInvoice(request);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 }

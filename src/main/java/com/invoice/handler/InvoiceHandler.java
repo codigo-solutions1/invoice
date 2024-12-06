@@ -2,9 +2,7 @@ package com.invoice.handler;
 
 import com.invoice.domain.InvoiceConfiguration;
 import com.invoice.domain.invoice.Invoice;
-import com.invoice.dto.CancelInvoiceCriteriaDTO;
-import com.invoice.dto.InvoiceResponseDTO;
-import com.invoice.dto.ResponseDTO;
+import com.invoice.dto.*;
 import com.invoice.dto.invoice.InvoiceDTO;
 import com.invoice.expert.LegacyInvoiceExpert;
 import com.invoice.service.InvoiceConfigurationService;
@@ -42,8 +40,8 @@ public class InvoiceHandler {
                 .build();
     }
 
-    public ResponseDTO cancelInvoice(String invoiceConfigCode, CancelInvoiceCriteriaDTO cancelInvoiceCriteriaDTO){
-        InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(invoiceConfigCode);
+    public ResponseDTO cancelInvoice(CancelInvoiceCriteriaDTO request){
+        InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(request.getInvoiceConfigurationCode());
 
 //        invoiceExpert.cancel(invoiceConfigCode, invoiceCriteriaDTO);
         return ResponseDTO.builder()
@@ -52,4 +50,7 @@ public class InvoiceHandler {
                 .build();
     }
 
+    public InquireInvoiceResponseDTO inquireInvoice(InquireInvoiceCriteriaDTO request) {
+        return null;
+    }
 }
