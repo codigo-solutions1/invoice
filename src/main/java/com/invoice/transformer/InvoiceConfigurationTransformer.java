@@ -6,6 +6,8 @@ import com.invoice.dto.configuration.InvoiceConfigurationDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Component
 @RequiredArgsConstructor
 public class InvoiceConfigurationTransformer implements Transformer<InvoiceConfigurationDTO, InvoiceConfiguration> {
@@ -14,12 +16,16 @@ public class InvoiceConfigurationTransformer implements Transformer<InvoiceConfi
 
     @Override
     public InvoiceConfiguration toEntity(InvoiceConfigurationDTO model) {
+        LocalDate now = LocalDate.now();
+
+        boolean isNew = model.getId() == null;
+
         return InvoiceConfiguration.builder()
                 .id(model.getId())
                 .invoiceConfigurationCode(model.getInvoiceConfigurationCode())
                 .invoiceConfigurationType(invoiceConfigurationTypeTransformer.toEntity(model.getInvoiceConfigurationType()))
-                .createdDate(model.getCreatedDate())
-                .modifiedDate(model.getModifiedDate())
+                .createdDate(now)
+                .modifiedDate(isNew ? now : model.getCreatedDate())
                 .sourceSystemCode(model.getSourceSystemCode())
                 .paymentConfirmationUrl(model.getPaymentConfirmationUrl())
                 .serviceProviderCode(model.getServiceProviderCode())
@@ -34,8 +40,8 @@ public class InvoiceConfigurationTransformer implements Transformer<InvoiceConfi
                 .id(entity.getId())
                 .invoiceConfigurationCode(entity.getInvoiceConfigurationCode())
                 .invoiceConfigurationType(invoiceConfigurationTypeTransformer.toModel(entity.getInvoiceConfigurationType()))
-                .createdDate(entity.getCreatedDate())
-                .modifiedDate(entity.getModifiedDate())
+                .createdDate(entity.getCreatedDate()) // Include createdDate in the response
+                .modifiedDate(entity.getModifiedDate()) // Include modifiedDate in the response
                 .sourceSystemCode(entity.getSourceSystemCode())
                 .paymentConfirmationUrl(entity.getPaymentConfirmationUrl())
                 .serviceProviderCode(entity.getServiceProviderCode())

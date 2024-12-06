@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.time.Instant;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
@@ -17,6 +17,8 @@ public class InvoiceConfigurationDTO extends ResponseDTO {
     private UUID id;
     private String invoiceConfigurationCode;
     private InvoiceConfigurationTypeDTO invoiceConfigurationType;
+    private LocalDate createdDate;
+    private LocalDate modifiedDate;
     private String sourceSystemCode;
     private String paymentConfirmationUrl;
     private String serviceProviderCode;
