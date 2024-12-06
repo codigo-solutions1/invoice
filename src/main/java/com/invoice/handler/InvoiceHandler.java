@@ -32,6 +32,10 @@ public class InvoiceHandler {
         Invoice invoice = invoiceTransformer.toEntity(model);
         Invoice invoiceFromDB = invoiceService.createInvoice(invoice);
         legacyInvoiceExpert.create(invoiceFromDB);
+        return createResponse(invoiceFromDB);
+    }
+
+    private InvoiceResponseDTO createResponse(Invoice invoiceFromDB) {
         return InvoiceResponseDTO.builder()
                 .responseCode(String.valueOf(HttpStatus.CREATED.value()))
                 .invoice(invoiceTransformer.toModel(invoiceFromDB))
