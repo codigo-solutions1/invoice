@@ -6,13 +6,13 @@ import com.invoice.dto.*;
 import com.invoice.dto.invoice.InvoiceDTO;
 import com.invoice.expert.LegacyInvoiceExpert;
 import com.invoice.service.InvoiceConfigurationService;
+import com.invoice.service.InvoiceService;
 import com.invoice.transformer.InvoiceConfigurationTransformer;
 import com.invoice.transformer.InvoiceTransformer;
 import com.invoice.validator.InvoiceValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
-import com.invoice.service.InvoiceService;
 
 @Component
 @RequiredArgsConstructor
@@ -40,7 +40,7 @@ public class InvoiceHandler {
                 .build();
     }
 
-    public ResponseDTO cancelInvoice(CancelInvoiceCriteriaDTO request){
+    public ResponseDTO cancelInvoice(CancelInvoiceCriteriaDTO request) {
         InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(request.getInvoiceConfigurationCode());
 
 //        invoiceExpert.cancel(invoiceConfigCode, invoiceCriteriaDTO);
@@ -51,6 +51,10 @@ public class InvoiceHandler {
     }
 
     public InquireInvoiceResponseDTO inquireInvoice(InquireInvoiceCriteriaDTO request) {
+        return null;
+    }
+
+    public PendingInvoiceResponseDTO getInvoicesByCriteria(InvoiceCriteriaDTO request) {
         return null;
     }
 }

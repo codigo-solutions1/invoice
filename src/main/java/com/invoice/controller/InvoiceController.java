@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "Invoice Controller", description = "API for managing invoices")
 @RestController
 @RequiredArgsConstructor
@@ -45,5 +47,15 @@ public class InvoiceController {
     public ResponseEntity<InquireInvoiceResponseDTO> inquireInvoice(@RequestBody InquireInvoiceCriteriaDTO request) {
         InquireInvoiceResponseDTO response = invoiceHandler.inquireInvoice(request);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
+    }
+
+    @Operation(summary = "Get information about unpaid invoices",
+            description = "This endpoint allows you to get information about unpaid invoices based on the provided criteria.",
+            responses = {@ApiResponse(responseCode = "200", description = "Invoices found successfully"),
+                    @ApiResponse(responseCode = "400", description = "Invalid input data")})
+    @GetMapping
+    public ResponseEntity<PendingInvoiceResponseDTO> findUnpaidInvoices(@RequestBody InvoiceCriteriaDTO request) {
+        PendingInvoiceResponseDTO response = invoiceHandler.getInvoicesByCriteria(request);
+        return ResponseEntity.ok(response);
     }
 }
