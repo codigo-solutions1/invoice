@@ -20,7 +20,6 @@ public class InvoiceServiceImpl implements InvoiceService {
         //TODO: find configuration by invoiceConfigurationType and configuration code
         InvoiceConfiguration configuration = invoiceConfigurationService.findByConfigurationCode(invoice.getConfigurationCode());
         Invoice invoiceFromDB = invoiceRepository.save(invoice);
-        invoiceFromDB.setConfigurationCode(configuration.getInvoiceConfigurationCode());
         invoiceFromDB.setInvoiceConfiguration(configuration);
         return invoiceFromDB;
     }

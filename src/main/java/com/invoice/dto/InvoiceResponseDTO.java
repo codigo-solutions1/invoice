@@ -1,5 +1,6 @@
 package com.invoice.dto;
 
+import com.invoice.dto.invoice.InvoiceDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,5 +11,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @Data
 public class InvoiceResponseDTO extends ResponseDTO {
-    private String UPRSInvoiceNo;
+    private InvoiceDTO invoice;
+    private InvoiceConfigurationDTO invoiceConfiguration;
 }
