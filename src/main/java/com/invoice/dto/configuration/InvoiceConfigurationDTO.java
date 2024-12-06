@@ -17,8 +17,6 @@ public class InvoiceConfigurationDTO extends ResponseDTO {
     private UUID id;
     private String invoiceConfigurationCode;
     private InvoiceConfigurationTypeDTO invoiceConfigurationType;
-    private Instant createdDate;
-    private Instant modifiedDate;
     private String sourceSystemCode;
     private String paymentConfirmationUrl;
     private String serviceProviderCode;
