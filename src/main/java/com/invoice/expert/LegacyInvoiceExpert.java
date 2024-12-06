@@ -7,7 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.invoice.adapter.InvoiceAdapter;
 import com.invoice.domain.InvoiceConfiguration;
 import com.invoice.domain.invoice.Invoice;
-import com.invoice.dto.InvoiceCriteriaDTO;
+import com.invoice.dto.CancelInvoiceCriteriaDTO;
 import com.invoice.service.InvoiceConfigurationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,11 +31,11 @@ public class LegacyInvoiceExpert {
         }
     }
 
-    public void cancel(String invoiceConfigCode, InvoiceCriteriaDTO invoiceCriteriaDTO) {
+    public void cancel(String invoiceConfigCode, CancelInvoiceCriteriaDTO cancelInvoiceCriteriaDTO) {
         try {
             invoiceConfigurationService.findByConfigurationCode(invoiceConfigCode);
             ObjectMapper objectMapper = new ObjectMapper();
-            String invoiceJson = objectMapper.writeValueAsString(invoiceCriteriaDTO);
+            String invoiceJson = objectMapper.writeValueAsString(cancelInvoiceCriteriaDTO);
 //            invoiceAdapter.cancelInvoice(invoiceJson);
         } catch (Exception e) {
             throw new RuntimeException(e);

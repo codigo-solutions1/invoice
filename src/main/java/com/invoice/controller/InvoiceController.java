@@ -1,6 +1,6 @@
 package com.invoice.controller;
 
-import com.invoice.dto.InvoiceCriteriaDTO;
+import com.invoice.dto.CancelInvoiceCriteriaDTO;
 import com.invoice.dto.InvoiceResponseDTO;
 import com.invoice.dto.ResponseDTO;
 import com.invoice.dto.invoice.InvoiceDTO;
@@ -25,10 +25,9 @@ public class InvoiceController {
             description = "This endpoint allows you to create a new invoice configuration.",
             responses = {@ApiResponse(responseCode = "200", description = "Invoice configuration created successfully"),
                     @ApiResponse(responseCode = "400", description = "Invalid input data")})
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<InvoiceResponseDTO> createInvoice(@RequestBody InvoiceDTO dto) {
         InvoiceResponseDTO response = invoiceHandler.createInvoice(dto);
-        //TODO: Add Invoice and Invoice configuration to Invoice Response DTO
         return ResponseEntity.ok(response);
     }
 
@@ -36,7 +35,7 @@ public class InvoiceController {
             responses = {@ApiResponse(responseCode = "200", description = "Canceled invoice successfully"),
                     @ApiResponse(responseCode = "400", description = "Invalid input data")})
     @PostMapping("/cancel")
-    public ResponseEntity<ResponseDTO> cancelInvoice(@RequestBody InvoiceCriteriaDTO invoiceCriteriaDTO) {
+    public ResponseEntity<ResponseDTO> cancelInvoice(@RequestBody CancelInvoiceCriteriaDTO cancelInvoiceCriteriaDTO) {
 //        ResponseDTO response = invoiceHandler.cancelInvoice(invoiceCriteriaDTO);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
