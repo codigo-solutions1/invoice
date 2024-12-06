@@ -1,6 +1,6 @@
 package com.invoice.handler;
 
-import com.invoice.dto.InvoiceConfigurationDTO;
+import com.invoice.dto.configuration.InvoiceConfigurationDTO;
 import com.invoice.domain.InvoiceConfiguration;
 import com.invoice.service.InvoiceConfigurationService;
 import com.invoice.transformer.InvoiceConfigurationTransformer;

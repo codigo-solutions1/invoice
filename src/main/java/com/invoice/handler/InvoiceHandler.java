@@ -38,8 +38,6 @@ public class InvoiceHandler {
     private InvoiceResponseDTO createResponse(Invoice invoiceFromDB) {
         return InvoiceResponseDTO.builder()
                 .responseCode(String.valueOf(HttpStatus.CREATED.value()))
-                .invoice(invoiceTransformer.toModel(invoiceFromDB))
-                .invoiceConfiguration(invoiceConfigurationTransformer.toModel(invoiceFromDB.getInvoiceConfiguration()))
                 .description("Data saved successfully")
                 .build();
     }

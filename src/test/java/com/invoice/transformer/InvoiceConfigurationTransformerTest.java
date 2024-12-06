@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.invoice.domain.InvoiceConfiguration;
 import com.invoice.domain.InvoiceConfigurationType;
-import com.invoice.dto.InvoiceConfigurationDTO;
-import com.invoice.dto.InvoiceConfigurationTypeDTO;
+import com.invoice.dto.configuration.InvoiceConfigurationDTO;
+import com.invoice.dto.configuration.InvoiceConfigurationTypeDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

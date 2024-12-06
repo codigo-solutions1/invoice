@@ -1,8 +1,7 @@
 package com.invoice.transformer;
 
 import com.invoice.domain.InvoiceConfigurationType;
-import com.invoice.dto.InvoiceConfigurationTypeDTO;
-import lombok.AllArgsConstructor;
+import com.invoice.dto.configuration.InvoiceConfigurationTypeDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

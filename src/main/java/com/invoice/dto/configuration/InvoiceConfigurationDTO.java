@@ -1,9 +1,10 @@
-package com.invoice.dto;
+package com.invoice.dto.configuration;
 
+import com.invoice.dto.ResponseDTO;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -11,8 +12,8 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class InvoiceConfigurationDTO {
+@SuperBuilder
+public class InvoiceConfigurationDTO extends ResponseDTO {
     private UUID id;
     private String invoiceConfigurationCode;
     private InvoiceConfigurationTypeDTO invoiceConfigurationType;
