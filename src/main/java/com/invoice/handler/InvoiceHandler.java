@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class InvoiceHandler {
@@ -54,7 +56,7 @@ public class InvoiceHandler {
         return null;
     }
 
-    public PendingInvoiceResponseDTO getInvoicesByCriteria(InvoiceCriteriaDTO request) {
+    public PendingInvoiceResponseDTO getInvoicesByCriteria(List<String> request) {
         return null;
     }
 }

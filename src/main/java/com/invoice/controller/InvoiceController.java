@@ -49,13 +49,13 @@ public class InvoiceController {
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 
-    @Operation(summary = "Get information about unpaid invoices",
-            description = "This endpoint allows you to get information about unpaid invoices based on the provided criteria.",
+    @Operation(summary = "Get information about pending invoices",
+            description = "This endpoint allows you to get information about pending invoices based on the provided criteria.",
             responses = {@ApiResponse(responseCode = "200", description = "Invoices found successfully"),
                     @ApiResponse(responseCode = "400", description = "Invalid input data")})
     @GetMapping
-    public ResponseEntity<PendingInvoiceResponseDTO> findUnpaidInvoices(@RequestBody InvoiceCriteriaDTO request) {
-        PendingInvoiceResponseDTO response = invoiceHandler.getInvoicesByCriteria(request);
+    public ResponseEntity<PendingInvoiceResponseDTO> findPendingInvoices(@RequestParam List<String> invoiceIds) {
+        PendingInvoiceResponseDTO response = invoiceHandler.getInvoicesByCriteria(invoiceIds);
         return ResponseEntity.ok(response);
     }
 }
