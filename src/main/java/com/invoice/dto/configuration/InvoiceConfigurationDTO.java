@@ -1,12 +1,12 @@
 package com.invoice.dto.configuration;
 
 import com.invoice.dto.ResponseDTO;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
@@ -15,18 +15,20 @@ import java.util.UUID;
 @SuperBuilder
 public class InvoiceConfigurationDTO extends ResponseDTO {
     private UUID id;
+    @NotEmpty(message = "Invoice Configuration Code cannot be empty")
     private String invoiceConfigurationCode;
     private InvoiceConfigurationTypeDTO invoiceConfigurationType;
-    private LocalDate createdDate;
-    private LocalDate modifiedDate;
+    @NotEmpty(message = "Source System Code cannot be empty")
     private String sourceSystemCode;
     private String paymentConfirmationUrl;
+    @NotEmpty(message = "Service Provider Code cannot be empty")
     private String serviceProviderCode;
-    private String callbackUrl;
+    @NotEmpty(message = "Service Provider Name cannot be empty")
     private String sourceSysChannel;
+    private String callbackUrl;
 
-    public UUID getId(){
-    return id == null? UUID.randomUUID() : id;
+    public UUID getId() {
+        return id == null ? UUID.randomUUID() : id;
     }
 }
 

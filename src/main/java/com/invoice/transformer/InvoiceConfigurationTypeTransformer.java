@@ -12,7 +12,7 @@ public class InvoiceConfigurationTypeTransformer implements Transformer<InvoiceC
     @Override
     public InvoiceConfigurationType toEntity(InvoiceConfigurationTypeDTO model) {
         return InvoiceConfigurationType.builder()
-                .type(model.getType())
+                .type(model.getInvoiceConfigurationType())
                 .serviceCode(model.getServiceCode())
                 .entityTypeCode(model.getEntityTypeCode())
                 .ledgerAlias(model.getLedgerAlias())
@@ -22,7 +22,7 @@ public class InvoiceConfigurationTypeTransformer implements Transformer<InvoiceC
     @Override
     public InvoiceConfigurationTypeDTO toModel(InvoiceConfigurationType entity) {
         return InvoiceConfigurationTypeDTO.builder()
-                .type(entity.getType())
+                .invoiceConfigurationType(entity.getType())
                 .serviceCode(entity.getServiceCode())
                 .entityTypeCode(entity.getEntityTypeCode())
                 .ledgerAlias(entity.getLedgerAlias())

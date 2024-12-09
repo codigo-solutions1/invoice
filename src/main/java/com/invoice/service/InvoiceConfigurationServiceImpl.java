@@ -16,7 +16,8 @@ public class InvoiceConfigurationServiceImpl implements InvoiceConfigurationServ
 
     @Override
     public InvoiceConfiguration create(InvoiceConfiguration configuration) {
-        if (invoiceConfigurationRepository.existsByInvoiceConfigurationCode(configuration.getInvoiceConfigurationCode()))
+        if (invoiceConfigurationRepository.existsByInvoiceConfigurationCodeAndSourceSystemCode(
+                configuration.getInvoiceConfigurationCode(), configuration.getSourceSystemCode()))
             throw new DuplicateEntryException("Duplicate entry for invoice configuration code: " + configuration.getInvoiceConfigurationCode());
         return invoiceConfigurationRepository.save(configuration);
     }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public interface InvoiceConfigurationRepository extends MongoRepository<InvoiceConfiguration, String> {
 
-    boolean existsByInvoiceConfigurationCode(String invoiceConfigurationCode);
+    boolean existsByInvoiceConfigurationCodeAndSourceSystemCode(String invoiceConfigurationCode, String sourceSystemCode);
 
     InvoiceConfiguration findByInvoiceConfigurationCode(String code);
 }
