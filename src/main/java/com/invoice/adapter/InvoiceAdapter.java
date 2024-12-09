@@ -54,6 +54,28 @@ public class InvoiceAdapter {
     }
 
     public void cancelInvoice(String invoice) {
+        Connection conn = null;
+        CallableStatement stmt = null;
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            conn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+            stmt = conn.prepareCall("{call process_invoice(?)}");
+            stmt.setString(1, invoice);
+            stmt.execute();
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage(), e);
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e.getMessage(), e);
+            }
+        }
     }
 
     public void inquireInvoice(String invoice) {

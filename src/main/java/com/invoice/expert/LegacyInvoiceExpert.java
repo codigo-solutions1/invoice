@@ -34,7 +34,7 @@ public class LegacyInvoiceExpert {
     public void cancel(CancelInvoiceCriteriaDTO request, InvoiceConfiguration invoiceConfiguration) {
         try {
             //TODO: Send sourceSystemCode serviceProviderCode
-            String invoiceJson = cancelInvoiceJson(request.getSourceSysChannel(), request.getCancelRemarks(), request.getERADVoucherRefNo(), invoiceConfiguration.getSourceSystemCode(), invoiceConfiguration.getServiceProviderCode());;
+            String invoiceJson = cancelInvoiceJson(request, invoiceConfiguration);;
 //            invoiceAdapter.cancelInvoice(invoiceJson);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -69,20 +69,15 @@ public class LegacyInvoiceExpert {
         return objectMapper.writeValueAsString(invoiceNode);
     }
 
-    private String cancelInvoiceJson(String sourceSysChannel, String., InvoiceConfiguration invoiceConfiguration) throws JsonProcessingException {
+    private String cancelInvoiceJson(CancelInvoiceCriteriaDTO cancelInvoiceCriteriaDTO, InvoiceConfiguration invoiceConfiguration) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
-        String invoiceJson = objectMapper.writeValueAsString(invoiceDTO);
+        String invoiceJson = objectMapper.writeValueAsString(cancelInvoiceCriteriaDTO);
         ObjectNode invoiceNode = (ObjectNode) objectMapper.readTree(invoiceJson);
         invoiceNode.put("sourceSystemCode", invoiceConfiguration.getSourceSystemCode());
         invoiceNode.put("serviceProviderCode", invoiceConfiguration.getServiceProviderCode());
         invoiceNode.remove("invoiceConfigurationCode");
         invoiceNode.remove("invoiceConfiguration");
-        invoiceNode.get("invoiceLineDetail").forEach(invoiceLineDetail -> {
-            ((ObjectNode) invoiceLineDetail).put("ledgerAlias", invoiceConfiguration.getInvoiceConfigurationType().getLedgerAlias());
-            ((ObjectNode) invoiceLineDetail).put("serviceCode", invoiceConfiguration.getInvoiceConfigurationType().getServiceCode());
-            ((ObjectNode) invoiceLineDetail).put("entityTypeCode", invoiceConfiguration.getInvoiceConfigurationType().getEntityTypeCode());
-        });
         return objectMapper.writeValueAsString(invoiceNode);
     }
 
