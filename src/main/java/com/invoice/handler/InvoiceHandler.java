@@ -42,6 +42,28 @@ public class InvoiceHandler {
 
     private InvoiceResponseDTO createResponse(Invoice invoiceFromDB, String invoiceConfigCode) {
         InvoiceConfiguration configuration = invoiceConfigurationService.findByConfigurationCode(invoiceConfigCode);
+        return createInvoiceResponse(invoiceFromDB, configuration);
+    }
+
+    public ResponseDTO cancelInvoice(CancelInvoiceCriteriaDTO request) {
+        InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(request.getInvoiceConfigurationCode());
+        legacyInvoiceExpert.cancel(request.getInvoiceConfigurationCode(), request.getSourceSysChannel(), request.getERADVoucherRefNo());
+        return ResponseDTO.builder()
+                .responseCode("200")
+                .description("Data saved successfully")
+                .build();
+    }
+
+    public InquireInvoiceResponseDTO inquireInvoice(InquireInvoiceCriteriaDTO request) {
+        return null;
+    }
+
+    public PendingInvoiceResponseDTO getInvoicesByCriteria(List<String> request) {
+        return null;
+    }
+
+
+    private InvoiceResponseDTO createInvoiceResponse(Invoice invoiceFromDB, InvoiceConfiguration configuration) {
         return InvoiceResponseDTO.builder()
                 .responseCode(String.valueOf(HttpStatus.CREATED.value()))
                 .description("Data saved successfully")
@@ -64,23 +86,5 @@ public class InvoiceHandler {
                 )
                 .reserveAttribute(reserveAttributeTransformer.toModel(invoiceFromDB.getReserveAttribute()))
                 .build();
-    }
-
-    public ResponseDTO cancelInvoice(CancelInvoiceCriteriaDTO request) {
-        InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(request.getInvoiceConfigurationCode());
-
-//        invoiceExpert.cancel(invoiceConfigCode, invoiceCriteriaDTO);
-        return ResponseDTO.builder()
-                .responseCode("200")
-                .description("Data saved successfully")
-                .build();
-    }
-
-    public InquireInvoiceResponseDTO inquireInvoice(InquireInvoiceCriteriaDTO request) {
-        return null;
-    }
-
-    public PendingInvoiceResponseDTO getInvoicesByCriteria(List<String> request) {
-        return null;
     }
 }
