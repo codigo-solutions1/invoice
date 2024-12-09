@@ -14,5 +14,4 @@ public class PendingInvoiceDTO {
     private String description;
     private double amount;
     private String issueDate;
-
 }
