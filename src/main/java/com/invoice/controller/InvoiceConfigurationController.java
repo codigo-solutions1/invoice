@@ -7,13 +7,16 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Validated
 @Tag(name = "Invoice Configuration Controller", description = "API for managing invoice configurations")
 @RestController
 @RequiredArgsConstructor
@@ -33,8 +36,7 @@ public class InvoiceConfigurationController {
     )
     @PostMapping
     public ResponseEntity<InvoiceConfigurationResponseDTO> createInvoiceConfigurations(
-            @Parameter(description = "Invoice configuration data to be created", required = true)
-            @RequestBody InvoiceConfigurationDTO invoiceConfigurationDTO) {
+            @Valid @RequestBody InvoiceConfigurationDTO invoiceConfigurationDTO) {
         InvoiceConfigurationResponseDTO response = invoiceConfigurationHandler.createInvoiceConfiguration(invoiceConfigurationDTO);
         return ResponseEntity.ok(response);
     }

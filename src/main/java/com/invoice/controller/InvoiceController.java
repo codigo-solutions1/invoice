@@ -6,6 +6,7 @@ import com.invoice.handler.InvoiceHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class InvoiceController {
             responses = {@ApiResponse(responseCode = "200", description = "Invoice configuration created successfully"),
                     @ApiResponse(responseCode = "400", description = "Invalid input data")})
     @PostMapping
-    public ResponseEntity<InvoiceResponseDTO> createInvoice(@RequestBody InvoiceDTO request) {
+    public ResponseEntity<InvoiceResponseDTO> createInvoice(@Valid  @RequestBody InvoiceDTO request) {
         InvoiceResponseDTO response = invoiceHandler.createInvoice(request);
         return ResponseEntity.ok(response);
     }

@@ -1,6 +1,5 @@
 package com.invoice.dto.configuration;
 
-import com.invoice.dto.ResponseDTO;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class InvoiceConfigurationDTO extends ResponseDTO {
+public class InvoiceConfigurationDTO {
     private UUID id;
     @NotEmpty(message = "Invoice Configuration Code cannot be empty")
     private String invoiceConfigurationCode;
