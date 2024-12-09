@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,6 +14,9 @@ import lombok.NoArgsConstructor;
 public class PendingInvoiceDTO {
     private String invoiceNumber;
     private String description;
-    private double amount;
-    private String issueDate;
+    private BigDecimal invoiceAmount;
+    private BigDecimal pendingAmount;
+    private String invoiceDate;
+    private String sourceSysRefNumber;
+    private String serviceName;
 }

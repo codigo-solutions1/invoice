@@ -32,6 +32,7 @@ public class LegacyInvoiceExpert {
 
     public void cancel(String invoiceConfigurationCode, String sourceSysChannel, String eradVoucherRefNo) {
         try {
+            //TODO: Send sourceSystemCode serviceProviderCode
             ObjectMapper objectMapper = new ObjectMapper();
 //            String invoiceJson = objectMapper.writeValueAsString();
 //            invoiceAdapter.cancelInvoice(invoiceJson);

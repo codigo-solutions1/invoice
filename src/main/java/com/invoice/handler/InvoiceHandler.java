@@ -9,7 +9,6 @@ import com.invoice.expert.LegacyInvoiceExpert;
 import com.invoice.service.InvoiceConfigurationService;
 import com.invoice.service.InvoiceService;
 import com.invoice.transformer.CustomerDetailTransformer;
-import com.invoice.transformer.InvoiceConfigurationTransformer;
 import com.invoice.transformer.InvoiceTransformer;
 import com.invoice.transformer.ReserveAttributeTransformer;
 import com.invoice.validator.InvoiceValidator;
@@ -26,7 +25,6 @@ public class InvoiceHandler {
     private final InvoiceConfigurationService invoiceConfigurationService;
     private final InvoiceValidator invoiceValidator;
     private final InvoiceTransformer invoiceTransformer;
-    private final InvoiceConfigurationTransformer invoiceConfigurationTransformer;
     private final InvoiceService invoiceService;
     private final LegacyInvoiceExpert legacyInvoiceExpert;
     private final CustomerDetailTransformer customerDetailTransformer;
@@ -47,7 +45,7 @@ public class InvoiceHandler {
 
     public ResponseDTO cancelInvoice(CancelInvoiceCriteriaDTO request) {
         InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(request.getInvoiceConfigurationCode());
-        legacyInvoiceExpert.cancel(request.getInvoiceConfigurationCode(), request.getSourceSysChannel(), request.getERADVoucherRefNo());
+        legacyInvoiceExpert.cancel(request, invoiceConfiguration);
         return ResponseDTO.builder()
                 .responseCode("200")
                 .description("Data saved successfully")
