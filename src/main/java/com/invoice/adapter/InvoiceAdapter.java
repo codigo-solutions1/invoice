@@ -55,4 +55,7 @@ public class InvoiceAdapter {
 
     public void cancelInvoice(String invoice) {
     }
+
+    public void inquireInvoice(String invoice) {
+    }
 }

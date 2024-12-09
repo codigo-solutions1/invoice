@@ -24,6 +24,7 @@ public class InvoiceConfigurationDTO {
     private String serviceProviderCode;
     @NotEmpty(message = "Service Provider Name cannot be empty")
     private String sourceSysChannel;
+    @NotEmpty(message = "Call back URL cannot be empty")
     private String callbackUrl;
 
     public UUID getId() {

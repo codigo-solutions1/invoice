@@ -40,6 +40,16 @@ public class LegacyInvoiceExpert {
         }
     }
 
+    public void inquire(String invoiceConfigurationCode, String sourceSysChannel, String eradVoucherRefNo) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+//            String invoiceJson = objectMapper.writeValueAsString();
+//            invoiceAdapter.inquireInvoice(invoiceJson);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     private String createInvoiceJson(Invoice invoiceDTO, InvoiceConfiguration invoiceConfiguration) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();

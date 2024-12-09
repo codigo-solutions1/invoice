@@ -55,7 +55,12 @@ public class InvoiceHandler {
     }
 
     public InquireInvoiceResponseDTO inquireInvoice(InquireInvoiceCriteriaDTO request) {
-        return null;
+        InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(request.getInvoiceConfigurationCode());
+        legacyInvoiceExpert.inquire(request.getInvoiceConfigurationCode(), request.getSourceSysChannel(), request.getERADVoucherRefNo());
+        return InquireInvoiceResponseDTO.builder()
+                .responseCode("200")
+                .description("Data saved successfully")
+                .build();
     }
 
     public PendingInvoiceResponseDTO getInvoicesByCriteria(List<String> request) {
