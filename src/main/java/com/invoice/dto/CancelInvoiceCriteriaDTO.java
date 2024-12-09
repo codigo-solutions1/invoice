@@ -13,4 +13,5 @@ public class CancelInvoiceCriteriaDTO {
     private String invoiceConfigurationCode;
     private String sourceSysChannel;
     private String ERADVoucherRefNo;
+    private String cancelRemarks;
 }
