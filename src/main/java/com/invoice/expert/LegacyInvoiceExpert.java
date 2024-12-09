@@ -7,6 +7,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.invoice.adapter.InvoiceAdapter;
 import com.invoice.domain.InvoiceConfiguration;
 import com.invoice.domain.invoice.Invoice;
+import com.invoice.dto.CancelInvoiceCriteriaDTO;
 import com.invoice.service.InvoiceConfigurationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,11 +31,10 @@ public class LegacyInvoiceExpert {
         }
     }
 
-    public void cancel(String invoiceConfigurationCode, String sourceSysChannel, String eradVoucherRefNo) {
+    public void cancel(CancelInvoiceCriteriaDTO request, InvoiceConfiguration invoiceConfiguration) {
         try {
             //TODO: Send sourceSystemCode serviceProviderCode
-            ObjectMapper objectMapper = new ObjectMapper();
-//            String invoiceJson = objectMapper.writeValueAsString();
+            String invoiceJson = cancelInvoiceJson(request.getSourceSysChannel(), request.getCancelRemarks(), request.getERADVoucherRefNo(), invoiceConfiguration.getSourceSystemCode(), invoiceConfiguration.getServiceProviderCode());;
 //            invoiceAdapter.cancelInvoice(invoiceJson);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -53,6 +53,23 @@ public class LegacyInvoiceExpert {
 
 
     private String createInvoiceJson(Invoice invoiceDTO, InvoiceConfiguration invoiceConfiguration) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        String invoiceJson = objectMapper.writeValueAsString(invoiceDTO);
+        ObjectNode invoiceNode = (ObjectNode) objectMapper.readTree(invoiceJson);
+        invoiceNode.put("sourceSystemCode", invoiceConfiguration.getSourceSystemCode());
+        invoiceNode.put("serviceProviderCode", invoiceConfiguration.getServiceProviderCode());
+        invoiceNode.remove("invoiceConfigurationCode");
+        invoiceNode.remove("invoiceConfiguration");
+        invoiceNode.get("invoiceLineDetail").forEach(invoiceLineDetail -> {
+            ((ObjectNode) invoiceLineDetail).put("ledgerAlias", invoiceConfiguration.getInvoiceConfigurationType().getLedgerAlias());
+            ((ObjectNode) invoiceLineDetail).put("serviceCode", invoiceConfiguration.getInvoiceConfigurationType().getServiceCode());
+            ((ObjectNode) invoiceLineDetail).put("entityTypeCode", invoiceConfiguration.getInvoiceConfigurationType().getEntityTypeCode());
+        });
+        return objectMapper.writeValueAsString(invoiceNode);
+    }
+
+    private String cancelInvoiceJson(String sourceSysChannel, String., InvoiceConfiguration invoiceConfiguration) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         String invoiceJson = objectMapper.writeValueAsString(invoiceDTO);
