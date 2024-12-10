@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PendingInvoiceResponseDTO {
+public class OutStandingInvoiceResponseDTO {
 
-    private List<PendingInvoiceDTO> pendingInvoices;
+    private List<OutStandingInvoiceDTO> outStandingInvoices;
 }

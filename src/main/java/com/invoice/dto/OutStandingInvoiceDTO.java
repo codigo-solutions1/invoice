@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PendingInvoiceDTO {
+public class OutStandingInvoiceDTO {
     private String invoiceNumber;
     private String description;
     private BigDecimal invoiceAmount;

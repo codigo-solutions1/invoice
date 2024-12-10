@@ -12,8 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Tag(name = "Invoice Controller", description = "API for managing invoices")
 @RestController
 @RequiredArgsConstructor
@@ -55,10 +53,11 @@ public class InvoiceController {
             description = "This endpoint allows you to get information about pending invoices based on the provided criteria.",
             responses = {@ApiResponse(responseCode = "200", description = "Invoices found successfully"),
                     @ApiResponse(responseCode = "400", description = "Invalid input data")})
-    @GetMapping
-    //TODO: Input is userID, Invoice number
-    public ResponseEntity<PendingInvoiceResponseDTO> findPendingInvoices(@RequestParam List<String> invoiceIds) {
-        PendingInvoiceResponseDTO response = invoiceHandler.getInvoicesByCriteria(invoiceIds);
+    @GetMapping("/outstanding")
+    public ResponseEntity<OutStandingInvoiceResponseDTO> findOutStandingInvoices(@RequestParam String userId, @RequestParam OutStandingInvoiceDTO invoiceIds) {
+
+        OutStandingInvoiceResponseDTO response = invoiceHandler.getInvoicesByCriteria(userId, invoiceIds);
         return ResponseEntity.ok(response);
     }
+
 }

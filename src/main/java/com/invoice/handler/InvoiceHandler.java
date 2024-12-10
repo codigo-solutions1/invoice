@@ -1,5 +1,6 @@
 package com.invoice.handler;
 
+import com.invoice.adapter.InvoiceAdapter;
 import com.invoice.domain.InvoiceConfiguration;
 import com.invoice.domain.invoice.Invoice;
 import com.invoice.dto.*;
@@ -16,8 +17,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 @RequiredArgsConstructor
 public class InvoiceHandler {
@@ -29,6 +28,7 @@ public class InvoiceHandler {
     private final LegacyInvoiceExpert legacyInvoiceExpert;
     private final CustomerDetailTransformer customerDetailTransformer;
     private final ReserveAttributeTransformer reserveAttributeTransformer;
+    private final InvoiceAdapter invoiceAdapter;
 
     public InvoiceResponseDTO createInvoice(InvoiceDTO model) {
         invoiceValidator.validate(model);
@@ -61,8 +61,8 @@ public class InvoiceHandler {
                 .build();
     }
 
-    public PendingInvoiceResponseDTO getInvoicesByCriteria(List<String> request) {
-        return null;
+    public OutStandingInvoiceResponseDTO getInvoicesByCriteria(String userId, OutStandingInvoiceDTO request) {
+        return invoiceAdapter.getInvoicesByCriteria(userId, request);
     }
 
 
