@@ -1,4 +1,4 @@
-package com.invoice.dto;
+package com.invoice.dto.invoice.outstanding;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

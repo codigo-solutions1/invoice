@@ -1,5 +1,6 @@
-package com.invoice.dto;
+package com.invoice.dto.invoice.inquire;
 
+import com.invoice.dto.ResponseDTO;
 import com.invoice.dto.invoice.CustomerDetailDTO;
 import com.invoice.dto.invoice.InvoiceLineDetailResponseDTO;
 import com.invoice.dto.invoice.ReserveAttributeDTO;

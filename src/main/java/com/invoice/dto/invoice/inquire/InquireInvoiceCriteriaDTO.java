@@ -1,4 +1,4 @@
-package com.invoice.dto;
+package com.invoice.dto.invoice.inquire;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,7 +1,7 @@
 package com.invoice.adapter;
 
-import com.invoice.dto.OutstandingInvoiceDTO;
-import com.invoice.dto.OutstandingInvoiceResponseDTO;
+import com.invoice.dto.invoice.outstanding.OutstandingInvoiceDTO;
+import com.invoice.dto.invoice.outstanding.OutstandingInvoiceResponseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

@@ -2,6 +2,10 @@ package com.invoice.controller;
 
 import com.invoice.dto.*;
 import com.invoice.dto.invoice.InvoiceDTO;
+import com.invoice.dto.invoice.inquire.InquireInvoiceCriteriaDTO;
+import com.invoice.dto.invoice.inquire.InquireInvoiceResponseDTO;
+import com.invoice.dto.invoice.outstanding.OutstandingInvoiceDTO;
+import com.invoice.dto.invoice.outstanding.OutstandingInvoiceResponseDTO;
 import com.invoice.handler.InvoiceHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -48,7 +52,6 @@ public class InvoiceController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    //TODO: Change every name to outstanding payments
     @Operation(summary = "Get information about outstanding invoices",
             description = "This endpoint allows you to get information about outstanding invoices based on the provided criteria.",
             responses = {@ApiResponse(responseCode = "200", description = "Invoices found successfully"),
