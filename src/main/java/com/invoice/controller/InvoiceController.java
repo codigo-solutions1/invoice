@@ -49,8 +49,8 @@ public class InvoiceController {
     }
 
     //TODO: Change every name to outstanding payments
-    @Operation(summary = "Get information about pending invoices",
-            description = "This endpoint allows you to get information about pending invoices based on the provided criteria.",
+    @Operation(summary = "Get information about outstanding invoices",
+            description = "This endpoint allows you to get information about outstanding invoices based on the provided criteria.",
             responses = {@ApiResponse(responseCode = "200", description = "Invoices found successfully"),
                     @ApiResponse(responseCode = "400", description = "Invalid input data")})
     @GetMapping("/outstanding")
