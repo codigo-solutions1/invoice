@@ -46,7 +46,7 @@ public class InvoiceHandler {
     }
 
     public ResponseDTO cancelInvoice(CancelInvoiceCriteriaDTO request) {
-        invoiceService.cancelInvoice(UUID.fromString(request.getERADVoucherRefNo()), request.getCancelRemarks());
+        invoiceService.cancelInvoice(request.getId(), request.getCancelRemarks());
 //        legacyInvoiceExpert.cancel(request, invoiceConfiguration);
         return ResponseDTO.success();
     }
@@ -66,6 +66,7 @@ public class InvoiceHandler {
     private InvoiceResponseDTO createInvoiceResponse(Invoice invoice) {
         InvoiceConfiguration configuration = invoice.getInvoiceConfiguration();
         return InvoiceResponseDTO.builder()
+                .id(invoice.getId())
                 .responseCode(String.valueOf(HttpStatus.CREATED.value()))
                 .description("Data saved successfully")
                 .sourceSystemAppRefNo(invoice.getSourceSystemAppRefNo())

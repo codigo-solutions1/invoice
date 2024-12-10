@@ -9,12 +9,14 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
+import java.util.UUID;
 
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class InvoiceResponseDTO extends ResponseDTO {
+    private UUID id;
     private String sourceSystemAppRefNo;
     private String sourceSysVoucherNo;
     private String sourceSysAppRefDate;
