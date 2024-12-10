@@ -36,7 +36,7 @@ public class InvoiceController {
     @PostMapping("/cancel")
     public ResponseEntity<ResponseDTO> cancelInvoice(@RequestBody CancelInvoiceCriteriaDTO request) {
         ResponseDTO response = invoiceHandler.cancelInvoice(request);
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @Operation(summary = "Inquire invoice", description = "This endpoint allows you to inquire an invoice.",
@@ -45,7 +45,7 @@ public class InvoiceController {
     @PostMapping("/inquire")
     public ResponseEntity<InquireInvoiceResponseDTO> inquireInvoice(@RequestBody InquireInvoiceCriteriaDTO request) {
         InquireInvoiceResponseDTO response = invoiceHandler.inquireInvoice(request);
-        return new ResponseEntity<>(null, HttpStatus.CREATED);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     //TODO: Change every name to outstanding payments
