@@ -38,22 +38,22 @@ public class InvoiceHandler {
         invoiceValidator.validate(model);
         Invoice invoice = invoiceTransformer.toEntity(model);
         Invoice invoiceFromDB = invoiceService.createInvoice(invoice);
-        legacyInvoiceExpert.create(invoiceFromDB);
+//        legacyInvoiceExpert.create(invoiceFromDB);
         return createResponse(invoiceFromDB, model.getInvoiceConfigurationCode());
+    }
+
+    public ResponseDTO cancelInvoice(CancelInvoiceCriteriaDTO request) {
+        InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(request.getInvoiceConfigurationCode());
+//        legacyInvoiceExpert.cancel(request, invoiceConfiguration);
+        return ResponseDTO.builder()
+                .responseCode("200")
+                .description("Data saved successfully")
+                .build();
     }
 
     private InvoiceResponseDTO createResponse(Invoice invoiceFromDB, String invoiceConfigCode) {
         InvoiceConfiguration configuration = invoiceConfigurationService.findByConfigurationCode(invoiceConfigCode);
         return createInvoiceResponse(invoiceFromDB, configuration);
-    }
-
-    public ResponseDTO cancelInvoice(CancelInvoiceCriteriaDTO request) {
-        InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(request.getInvoiceConfigurationCode());
-        legacyInvoiceExpert.cancel(request, invoiceConfiguration);
-        return ResponseDTO.builder()
-                .responseCode("200")
-                .description("Data saved successfully")
-                .build();
     }
 
     public InquireInvoiceResponseDTO inquireInvoice(InquireInvoiceCriteriaDTO request) {
