@@ -4,7 +4,6 @@ import com.invoice.dto.*;
 import com.invoice.dto.invoice.InvoiceDTO;
 import com.invoice.dto.invoice.inquire.InquireInvoiceCriteriaDTO;
 import com.invoice.dto.invoice.inquire.InquireInvoiceResponseDTO;
-import com.invoice.dto.invoice.outstanding.OutstandingInvoiceDTO;
 import com.invoice.dto.invoice.outstanding.OutstandingInvoiceRequestDTO;
 import com.invoice.dto.invoice.outstanding.OutstandingInvoiceResponseDTO;
 import com.invoice.handler.InvoiceHandler;
