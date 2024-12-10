@@ -42,7 +42,7 @@ public abstract class Invoice {
 
     public abstract Invoice submit();
 
-    public abstract Invoice cancel();
+    public abstract Invoice cancel(String reason);
 
     public abstract InvoiceStatus getStatus();
 }

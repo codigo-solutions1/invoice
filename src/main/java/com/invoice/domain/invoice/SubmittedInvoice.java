@@ -2,6 +2,8 @@ package com.invoice.domain.invoice;
 
 import lombok.experimental.SuperBuilder;
 
+import java.time.Instant;
+
 @SuperBuilder
 public class SubmittedInvoice extends Invoice{
     @Override
@@ -10,7 +12,7 @@ public class SubmittedInvoice extends Invoice{
     }
 
     @Override
-    public Invoice cancel() {
+    public Invoice cancel(String reason) {
         return CanceledInvoice.builder()
                 .id(this.getId())
                 .description(this.getDescription())
@@ -22,6 +24,8 @@ public class SubmittedInvoice extends Invoice{
                 .reserveAttribute(this.getReserveAttribute())
                 .customerDetail(this.getCustomerDetail())
                 .invoiceLineDetail(this.getInvoiceLineDetail())
+                .reason(reason)
+                .canceledAt(Instant.now())
                 .build();
     }
 

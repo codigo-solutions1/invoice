@@ -21,6 +21,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 @RequiredArgsConstructor
 public class InvoiceHandler {
@@ -39,21 +41,16 @@ public class InvoiceHandler {
         Invoice invoice = invoiceTransformer.toEntity(model);
         Invoice invoiceFromDB = invoiceService.createInvoice(invoice);
 //        legacyInvoiceExpert.create(invoiceFromDB);
-        return createResponse(invoiceFromDB, model.getInvoiceConfigurationCode());
+        return createInvoiceResponse(invoiceFromDB);
     }
 
     public ResponseDTO cancelInvoice(CancelInvoiceCriteriaDTO request) {
-        InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(request.getInvoiceConfigurationCode());
+        invoiceService.cancelInvoice(UUID.fromString(request.getERADVoucherRefNo()), request.getCancelRemarks());
 //        legacyInvoiceExpert.cancel(request, invoiceConfiguration);
         return ResponseDTO.builder()
                 .responseCode("200")
                 .description("Data saved successfully")
                 .build();
-    }
-
-    private InvoiceResponseDTO createResponse(Invoice invoiceFromDB, String invoiceConfigCode) {
-        InvoiceConfiguration configuration = invoiceConfigurationService.findByConfigurationCode(invoiceConfigCode);
-        return createInvoiceResponse(invoiceFromDB, configuration);
     }
 
     public InquireInvoiceResponseDTO inquireInvoice(InquireInvoiceCriteriaDTO request) {
@@ -70,17 +67,18 @@ public class InvoiceHandler {
     }
 
 
-    private InvoiceResponseDTO createInvoiceResponse(Invoice invoiceFromDB, InvoiceConfiguration configuration) {
+    private InvoiceResponseDTO createInvoiceResponse(Invoice invoice) {
+        InvoiceConfiguration configuration = invoice.getInvoiceConfiguration();
         return InvoiceResponseDTO.builder()
                 .responseCode(String.valueOf(HttpStatus.CREATED.value()))
                 .description("Data saved successfully")
-                .sourceSystemAppRefNo(invoiceFromDB.getSourceSystemAppRefNo())
-                .sourceSysVoucherNo(invoiceFromDB.getSourceSysVoucherNo())
-                .sourceSysAppRefDate(invoiceFromDB.getSourceSysAppRefDate())
-                .language(invoiceFromDB.getLanguage())
-                .sourceSysChannel(invoiceFromDB.getSourceSysChannel())
-                .customerDetail(customerDetailTransformer.toModel(invoiceFromDB.getCustomerDetail()))
-                .invoiceLineDetail(invoiceFromDB.getInvoiceLineDetail().stream()
+                .sourceSystemAppRefNo(invoice.getSourceSystemAppRefNo())
+                .sourceSysVoucherNo(invoice.getSourceSysVoucherNo())
+                .sourceSysAppRefDate(invoice.getSourceSysAppRefDate())
+                .language(invoice.getLanguage())
+                .sourceSysChannel(invoice.getSourceSysChannel())
+                .customerDetail(customerDetailTransformer.toModel(invoice.getCustomerDetail()))
+                .invoiceLineDetail(invoice.getInvoiceLineDetail().stream()
                         .map(line -> {
                             return InvoiceLineDetailResponseDTO.builder()
                                     .fee(line.getFee())
@@ -91,7 +89,7 @@ public class InvoiceHandler {
                                     .build();
                         }).toList()
                 )
-                .reserveAttribute(reserveAttributeTransformer.toModel(invoiceFromDB.getReserveAttribute()))
+                .reserveAttribute(reserveAttributeTransformer.toModel(invoice.getReserveAttribute()))
                 .build();
     }
 }

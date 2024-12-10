@@ -18,6 +18,7 @@ public class InvoiceResponseDTO extends ResponseDTO {
     private String sourceSystemAppRefNo;
     private String sourceSysVoucherNo;
     private String sourceSysAppRefDate;
+    private String eradVoucherRefNo;
     private String description;
     private String language;
     private String sourceSysChannel;

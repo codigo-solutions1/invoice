@@ -2,15 +2,19 @@ package com.invoice.domain.invoice;
 
 import lombok.experimental.SuperBuilder;
 
+import java.time.Instant;
+
 @SuperBuilder
 class CanceledInvoice extends Invoice {
+    private String reason;
+    private Instant canceledAt;
     @Override
     public Invoice submit() {
         throw new IllegalStateException("Canceled invoice cannot be submitted");
     }
 
     @Override
-    public Invoice cancel() {
+    public Invoice cancel(String reason) {
         throw new IllegalStateException("Canceled invoice cannot be canceled again");
     }
 
