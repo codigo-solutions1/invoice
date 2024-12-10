@@ -54,9 +54,9 @@ public class InvoiceController {
             responses = {@ApiResponse(responseCode = "200", description = "Invoices found successfully"),
                     @ApiResponse(responseCode = "400", description = "Invalid input data")})
     @GetMapping("/outstanding")
-    public ResponseEntity<OutStandingInvoiceResponseDTO> findOutStandingInvoices(@RequestParam String userId, @RequestParam OutStandingInvoiceDTO invoiceIds) {
+    public ResponseEntity<OutstandingInvoiceResponseDTO> findOutstandingInvoices(@RequestParam String userId, @RequestParam OutstandingInvoiceDTO invoiceIds) {
 
-        OutStandingInvoiceResponseDTO response = invoiceHandler.getInvoicesByCriteria(userId, invoiceIds);
+        OutstandingInvoiceResponseDTO response = invoiceHandler.getInvoicesByCriteria(userId, invoiceIds);
         return ResponseEntity.ok(response);
     }
 

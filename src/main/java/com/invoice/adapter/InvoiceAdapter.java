@@ -1,16 +1,12 @@
 package com.invoice.adapter;
 
-import com.invoice.dto.OutStandingInvoiceDTO;
-import com.invoice.dto.OutStandingInvoiceResponseDTO;
+import com.invoice.dto.OutstandingInvoiceDTO;
+import com.invoice.dto.OutstandingInvoiceResponseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,8 +78,8 @@ public class InvoiceAdapter {
     public void inquireInvoice(String invoice) {
     }
 
-    public OutStandingInvoiceResponseDTO getInvoicesByCriteria(String userId, OutStandingInvoiceDTO request) {
-        List<OutStandingInvoiceDTO> invoices = new ArrayList<>();
+    public OutstandingInvoiceResponseDTO getInvoicesByCriteria(String userId, OutstandingInvoiceDTO request) {
+        List<OutstandingInvoiceDTO> invoices = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
@@ -94,7 +90,7 @@ public class InvoiceAdapter {
             stmt.setString(1, userId);
             stmt.setString(2, request.getInvoiceNumber());
             ResultSet rs = stmt.executeQuery();
-            while (rs.next()) { OutStandingInvoiceDTO invoice = OutStandingInvoiceDTO.builder()
+            while (rs.next()) { OutstandingInvoiceDTO invoice = OutstandingInvoiceDTO.builder()
                     .invoiceNumber(rs.getString("INVOICE_NUMBER"))
                     .description(rs.getString("DESCRIPTION"))
                     .invoiceAmount(rs.getBigDecimal("INVOICE_AMOUNT"))
@@ -117,7 +113,7 @@ public class InvoiceAdapter {
                 throw new RuntimeException(e.getMessage(), e);
             }
         }
-        return OutStandingInvoiceResponseDTO.builder().outStandingInvoices(invoices).build();
+        return OutstandingInvoiceResponseDTO.builder().outStandingInvoices(invoices).build();
     }
 
 }

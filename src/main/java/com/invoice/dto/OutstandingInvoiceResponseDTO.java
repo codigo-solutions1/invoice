@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class OutStandingInvoiceResponseDTO {
+public class OutstandingInvoiceResponseDTO {
 
-    private List<OutStandingInvoiceDTO> outStandingInvoices;
+    private List<OutstandingInvoiceDTO> outStandingInvoices;
 }

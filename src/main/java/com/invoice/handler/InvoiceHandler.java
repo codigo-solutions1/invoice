@@ -61,7 +61,7 @@ public class InvoiceHandler {
                 .build();
     }
 
-    public OutStandingInvoiceResponseDTO getInvoicesByCriteria(String userId, OutStandingInvoiceDTO request) {
+    public OutstandingInvoiceResponseDTO getInvoicesByCriteria(String userId, OutstandingInvoiceDTO request) {
         return invoiceAdapter.getInvoicesByCriteria(userId, request);
     }
 
