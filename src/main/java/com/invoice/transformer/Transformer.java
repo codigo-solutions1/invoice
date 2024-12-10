@@ -9,6 +9,7 @@ public interface Transformer<M,E> {
 
     M toModel(E e);
 
+
     default List<E> toEntities(List<M> models) {
         return models.stream().map(this::toEntity).collect(Collectors.toList());
     }

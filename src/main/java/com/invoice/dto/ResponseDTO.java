@@ -12,4 +12,11 @@ import lombok.experimental.SuperBuilder;
 public class ResponseDTO {
     private String responseCode;
     private String description;
+
+    public static ResponseDTO success() {
+        return ResponseDTO.builder()
+                .responseCode("200")
+                .description("Success")
+                .build();
+    }
 }

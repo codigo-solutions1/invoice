@@ -43,4 +43,8 @@ public class InvoiceConfigurationTransformer implements Transformer<InvoiceConfi
                 .sourceSysChannel(entity.getSourceSysChannel())
                 .build();
     }
+
+    public void something(){
+
+    }
 }

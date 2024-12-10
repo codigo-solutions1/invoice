@@ -47,18 +47,13 @@ public class InvoiceHandler {
     public ResponseDTO cancelInvoice(CancelInvoiceCriteriaDTO request) {
         invoiceService.cancelInvoice(UUID.fromString(request.getERADVoucherRefNo()), request.getCancelRemarks());
 //        legacyInvoiceExpert.cancel(request, invoiceConfiguration);
-        return ResponseDTO.builder()
-                .responseCode("200")
-                .description("Data saved successfully")
-                .build();
+        return ResponseDTO.success();
     }
 
     public InquireInvoiceResponseDTO inquireInvoice(InquireInvoiceCriteriaDTO request) {
         InvoiceConfiguration invoiceConfiguration = invoiceConfigurationService.findByConfigurationCode(request.getInvoiceConfigurationCode());
         legacyInvoiceExpert.inquire(request.getInvoiceConfigurationCode(), request.getSourceSysChannel(), request.getERADVoucherRefNo());
         return InquireInvoiceResponseDTO.builder()
-                .responseCode("200")
-                .description("Data saved successfully")
                 .build();
     }
 

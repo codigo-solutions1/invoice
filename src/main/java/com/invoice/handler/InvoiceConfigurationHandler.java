@@ -19,7 +19,10 @@ public class InvoiceConfigurationHandler {
     public InvoiceConfigurationResponseDTO createInvoiceConfiguration(InvoiceConfigurationDTO model) {
         InvoiceConfiguration configuration = invoiceConfigurationTransformer.toEntity(model);
         InvoiceConfiguration configurationFromDB = invoiceConfigurationService.create(configuration);
+        return createResponse(configurationFromDB);
+    }
 
+    private static InvoiceConfigurationResponseDTO createResponse(InvoiceConfiguration configurationFromDB) {
         return InvoiceConfigurationResponseDTO.builder()
                 .responseCode(String.valueOf(HttpStatus.CREATED.value()))
                 .description("Invoice configuration created successfully")
