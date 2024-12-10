@@ -22,12 +22,12 @@ public class InvoiceConfigurationHandler {
         return createResponse(configurationFromDB);
     }
 
-    private static InvoiceConfigurationResponseDTO createResponse(InvoiceConfiguration configurationFromDB) {
+    private static InvoiceConfigurationResponseDTO createResponse(InvoiceConfiguration configuration) {
         return InvoiceConfigurationResponseDTO.builder()
                 .responseCode(String.valueOf(HttpStatus.CREATED.value()))
                 .description("Invoice configuration created successfully")
-                .invoiceConfigurationCode(configurationFromDB.getInvoiceConfigurationCode())
-                .id(configurationFromDB.getId())
+                .invoiceConfigurationCode(configuration.getInvoiceConfigurationCode())
+                .id(configuration.getId())
                 .build();
     }
 }
