@@ -1,6 +1,7 @@
 package com.invoice.adapter;
 
 import com.invoice.dto.invoice.outstanding.OutstandingInvoiceDTO;
+import com.invoice.dto.invoice.outstanding.OutstandingInvoiceRequestDTO;
 import com.invoice.dto.invoice.outstanding.OutstandingInvoiceResponseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -75,10 +76,7 @@ public class InvoiceAdapter {
         }
     }
 
-    public void inquireInvoice(String invoice) {
-    }
-
-    public OutstandingInvoiceResponseDTO getInvoicesByCriteria(String userId, OutstandingInvoiceDTO request) {
+    public OutstandingInvoiceResponseDTO getInvoicesByCriteria(String userId, OutstandingInvoiceRequestDTO request) {
         List<OutstandingInvoiceDTO> invoices = new ArrayList<>();
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -91,13 +89,13 @@ public class InvoiceAdapter {
             stmt.setString(2, request.getInvoiceNumber());
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) { OutstandingInvoiceDTO invoice = OutstandingInvoiceDTO.builder()
-                    .invoiceNumber(rs.getString("INVOICE_NUMBER"))
-                    .description(rs.getString("DESCRIPTION"))
-                    .invoiceAmount(rs.getBigDecimal("INVOICE_AMOUNT"))
-                    .pendingAmount(rs.getBigDecimal("PENDING_AMOUNT"))
-                    .invoiceDate(rs.getString("INVOICE_DATE"))
-                    .sourceSysRefNumber(rs.getString("SOURCE_SYS_REF_NUMBER"))
-                    .serviceName(rs.getString("SERVICE_NAME"))
+//                    .invoiceNumber(rs.getString("INVOICE_NUMBER"))
+//                    .description(rs.getString("DESCRIPTION"))
+//                    .invoiceAmount(rs.getBigDecimal("INVOICE_AMOUNT"))
+//                    .pendingAmount(rs.getBigDecimal("PENDING_AMOUNT"))
+//                    .invoiceDate(rs.getString("INVOICE_DATE"))
+//                    .sourceSysRefNumber(rs.getString("SOURCE_SYS_REF_NUMBER"))
+//                    .serviceName(rs.getString("SERVICE_NAME"))
                     .build();
                 invoices.add(invoice);
             }
@@ -113,7 +111,7 @@ public class InvoiceAdapter {
                 throw new RuntimeException(e.getMessage(), e);
             }
         }
-        return OutstandingInvoiceResponseDTO.builder().outStandingInvoices(invoices).build();
+        return OutstandingInvoiceResponseDTO.builder().build();
     }
 
 }

@@ -9,6 +9,7 @@ import com.invoice.dto.invoice.InvoiceLineDetailResponseDTO;
 import com.invoice.dto.invoice.inquire.InquireInvoiceCriteriaDTO;
 import com.invoice.dto.invoice.inquire.InquireInvoiceResponseDTO;
 import com.invoice.dto.invoice.outstanding.OutstandingInvoiceDTO;
+import com.invoice.dto.invoice.outstanding.OutstandingInvoiceRequestDTO;
 import com.invoice.dto.invoice.outstanding.OutstandingInvoiceResponseDTO;
 import com.invoice.expert.LegacyInvoiceExpert;
 import com.invoice.service.InvoiceConfigurationService;
@@ -57,7 +58,7 @@ public class InvoiceHandler {
                 .build();
     }
 
-    public OutstandingInvoiceResponseDTO getInvoicesByCriteria(String userId, OutstandingInvoiceDTO request) {
+    public OutstandingInvoiceResponseDTO getInvoicesByCriteria(String userId, OutstandingInvoiceRequestDTO request) {
         return invoiceAdapter.getInvoicesByCriteria(userId, request);
     }
 

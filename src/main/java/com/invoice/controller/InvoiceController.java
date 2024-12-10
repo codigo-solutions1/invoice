@@ -5,6 +5,7 @@ import com.invoice.dto.invoice.InvoiceDTO;
 import com.invoice.dto.invoice.inquire.InquireInvoiceCriteriaDTO;
 import com.invoice.dto.invoice.inquire.InquireInvoiceResponseDTO;
 import com.invoice.dto.invoice.outstanding.OutstandingInvoiceDTO;
+import com.invoice.dto.invoice.outstanding.OutstandingInvoiceRequestDTO;
 import com.invoice.dto.invoice.outstanding.OutstandingInvoiceResponseDTO;
 import com.invoice.handler.InvoiceHandler;
 import io.swagger.v3.oas.annotations.Operation;
@@ -57,7 +58,7 @@ public class InvoiceController {
             responses = {@ApiResponse(responseCode = "200", description = "Invoices found successfully"),
                     @ApiResponse(responseCode = "400", description = "Invalid input data")})
     @GetMapping("/outstanding")
-    public ResponseEntity<OutstandingInvoiceResponseDTO> findOutstandingInvoices(@RequestParam String userId, @RequestParam OutstandingInvoiceDTO invoiceIds) {
+    public ResponseEntity<OutstandingInvoiceResponseDTO> findOutstandingInvoices(@RequestParam String userId, @RequestParam OutstandingInvoiceRequestDTO invoiceIds) {
 
         OutstandingInvoiceResponseDTO response = invoiceHandler.getInvoicesByCriteria(userId, invoiceIds);
         return ResponseEntity.ok(response);
