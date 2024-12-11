@@ -1,10 +1,14 @@
 package com.invoice.domain.invoice;
 
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.TypeAlias;
 
 import java.time.Instant;
 
 @SuperBuilder
+@NoArgsConstructor
+@TypeAlias("canceledInvoice")
 class CanceledInvoice extends Invoice {
     private String reason;
     private Instant canceledAt;

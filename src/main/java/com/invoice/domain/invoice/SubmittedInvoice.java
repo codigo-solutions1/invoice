@@ -1,10 +1,15 @@
 package com.invoice.domain.invoice;
 
+
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.annotation.TypeAlias;
 
 import java.time.Instant;
 
 @SuperBuilder
+@NoArgsConstructor
+@TypeAlias("submittedInvoice")
 public class SubmittedInvoice extends Invoice{
     @Override
     public Invoice submit() {
